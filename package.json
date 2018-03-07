@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "express": "^4.16.2",
     "mime": "^2.2.0",
     "util": "^0.10.3",
     "yargs": "^11.0.0"

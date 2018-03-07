@@ -1,0 +1,11 @@
+{
+  "name": "18.yargs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.hello.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
