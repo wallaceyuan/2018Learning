@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/../201801/17.crypto/2.md5.js" description="//" line="9" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5c42755c-f3ca-4d3c-ac6e-d53a793e9d4c" name="Default" comment="">
+<<<<<<< HEAD
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/19.static/public/images/home/avatar.jpg" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/19.static/public/images/my.jpg" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/18.yargs/2.hello.js" />
@@ -14,6 +18,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/18.yargs/1.hello.js" afterPath="$PROJECT_DIR$/18.yargs/1.hello.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/18.yargs/hello.sh" afterPath="$PROJECT_DIR$/18.yargs/hello.sh" />
+=======
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/17.crypto/3.hmac.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/1.es6" afterPath="$PROJECT_DIR$/1.es6" />
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
     </list>
     <ignored path="2018培训.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,7 +44,52 @@
     <favorites_list name="2018培训" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+=======
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2.server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/16.http/2.server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rsa_private.key" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/17.crypto/rsa_private.key">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="3.hmac.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/17.crypto/3.hmac.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -93,6 +147,7 @@
         <option value="$PROJECT_DIR$/15.http/8.client.js" />
         <option value="$PROJECT_DIR$/15.http/9.server.js" />
         <option value="$PROJECT_DIR$/16.http/2.server.js" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/18.yargs/1.hello.js" />
         <option value="$PROJECT_DIR$/18.yargs/2.hello.js" />
@@ -102,6 +157,9 @@
         <option value="$PROJECT_DIR$/19.static/bin/www.js" />
         <option value="$PROJECT_DIR$/19.static/package.json" />
         <option value="$PROJECT_DIR$/19.static/bin/www" />
+=======
+        <option value="$PROJECT_DIR$/17.crypto/3.hmac.js" />
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
       </list>
     </option>
   </component>
@@ -112,10 +170,17 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="1701" />
     <option name="y" value="23" />
     <option name="width" value="1265" />
     <option name="height" value="1057" />
+=======
+    <option name="x" value="1771" />
+    <option name="y" value="-157" />
+    <option name="width" value="1233" />
+    <option name="height" value="982" />
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -142,14 +207,33 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scratches" />
       <pane id="Scope" />
+=======
+      <pane id="Scope">
+        <subPane subId="Project Files" />
+      </pane>
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="2018learn" />
+<<<<<<< HEAD
+=======
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2018learn" />
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2018learn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -159,6 +243,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="2018learn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="17.crypto" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -176,8 +264,26 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2018learn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2018learn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="15.http" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scratches" />
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -194,13 +300,17 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+<<<<<<< HEAD
       <recent name="$PROJECT_DIR$/19.static/src" />
       <recent name="$PROJECT_DIR$/19.static" />
+=======
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
       <recent name="$PROJECT_DIR$/16.http" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/15.http" />
     </key>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Node.js.2.server.js">
     <configuration default="false" name="1.server.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="$PROJECT_DIR$/15.http/1.server.js" working-dir="$PROJECT_DIR$/15.http">
       <method />
@@ -215,6 +325,22 @@
       <method />
     </configuration>
     <configuration default="false" name="2.server.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="$PROJECT_DIR$/16.http/2.server.js" working-dir="$PROJECT_DIR$/16.http">
+=======
+  <component name="RunManager" selected="Node.js.3.hmac.js">
+    <configuration default="false" name="1.server.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="$PROJECT_DIR$/15.http/1.server.js" working-dir="$PROJECT_DIR$/15.http">
+      <method />
+    </configuration>
+    <configuration default="false" name="8.client.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="$PROJECT_DIR$/15.http/8.client.js" working-dir="$PROJECT_DIR$/15.http">
+      <method />
+    </configuration>
+    <configuration default="false" name="9.server.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="$PROJECT_DIR$/15.http/9.server.js" working-dir="$PROJECT_DIR$/15.http">
+      <method />
+    </configuration>
+    <configuration default="false" name="2.server.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="$PROJECT_DIR$/16.http/2.server.js" working-dir="$PROJECT_DIR$/16.http">
+      <method />
+    </configuration>
+    <configuration default="false" name="3.hmac.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="3.hmac.js" working-dir="$PROJECT_DIR$/17.crypto">
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
       <method />
     </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -272,18 +398,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Node.js.1.server.js" />
-      <item index="1" class="java.lang.String" itemvalue="Node.js.6.server.js" />
-      <item index="2" class="java.lang.String" itemvalue="Node.js.8.client.js" />
-      <item index="3" class="java.lang.String" itemvalue="Node.js.9.server.js" />
-      <item index="4" class="java.lang.String" itemvalue="Node.js.2.server.js" />
+      <item index="1" class="java.lang.String" itemvalue="Node.js.8.client.js" />
+      <item index="2" class="java.lang.String" itemvalue="Node.js.9.server.js" />
+      <item index="3" class="java.lang.String" itemvalue="Node.js.2.server.js" />
+      <item index="4" class="java.lang.String" itemvalue="Node.js.3.hmac.js" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Node.js.2.server.js" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.8.client.js" />
-        <item index="2" class="java.lang.String" itemvalue="Node.js.9.server.js" />
-        <item index="3" class="java.lang.String" itemvalue="Node.js.1.server.js" />
-        <item index="4" class="java.lang.String" itemvalue="Node.js.6.server.js" />
+        <item index="0" class="java.lang.String" itemvalue="Node.js.3.hmac.js" />
+        <item index="1" class="java.lang.String" itemvalue="Node.js.2.server.js" />
+        <item index="2" class="java.lang.String" itemvalue="Node.js.8.client.js" />
+        <item index="3" class="java.lang.String" itemvalue="Node.js.9.server.js" />
+        <item index="4" class="java.lang.String" itemvalue="Node.js.1.server.js" />
       </list>
     </recent_temporary>
   </component>
@@ -310,14 +436,21 @@
       <workItem from="1519633830338" duration="2698000" />
       <workItem from="1519694163508" duration="494000" />
       <workItem from="1519713478177" duration="254000" />
+<<<<<<< HEAD
       <workItem from="1519882661881" duration="8911000" />
       <workItem from="1519954691900" duration="6510000" />
       <workItem from="1520213430490" duration="515000" />
       <workItem from="1520407215781" duration="2115000" />
+=======
+      <workItem from="1519882661881" duration="8156000" />
+      <workItem from="1519913018613" duration="25000" />
+      <workItem from="1519913086400" duration="1736000" />
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="75517000" />
   </component>
   <component name="ToolWindowManager">
@@ -328,6 +461,19 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+=======
+    <option name="totallyTimeSpent" value="67383000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1771" y="-157" width="1233" height="982" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1509901" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3275463" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26091588" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -360,6 +506,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/1.es6/Promise.js" />
     <entry file="file://$PROJECT_DIR$/4.node/2.log">
       <provider selected="true" editor-type-id="text-editor">
@@ -531,12 +678,79 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/15.http/req.txt">
+=======
+    <entry file="file://$PROJECT_DIR$/1.es6/9.generator.js" />
+    <entry file="file://$PROJECT_DIR$/201801/1.es6/8.class.js" />
+    <entry file="file://$PROJECT_DIR$/201801/1.es6/3.teplstr.js" />
+    <entry file="file://$PROJECT_DIR$/201801/1.es6/8.class.es5.js" />
+    <entry file="file://$PROJECT_DIR$/1.es6/promise/Promise-1.js" />
+    <entry file="file://$PROJECT_DIR$/1.es6/promise/Promise-2.js" />
+    <entry file="file://$PROJECT_DIR$/1.es6/11.promise.js" />
+    <entry file="file://$PROJECT_DIR$/1.es6/12.promise-chain.js" />
+    <entry file="file://$PROJECT_DIR$/1.es6/Promise.js" />
+    <entry file="file://$PROJECT_DIR$/4.node/2.log" />
+    <entry file="file://$PROJECT_DIR$/4.node/1.log" />
+    <entry file="file://$PROJECT_DIR$/4.node/3.console.js" />
+    <entry file="file://$PROJECT_DIR$/4.node/5.nextTick.js" />
+    <entry file="file://$PROJECT_DIR$/4.node/event.js" />
+    <entry file="file://$PROJECT_DIR$/4.node/6.event.js" />
+    <entry file="file://$PROJECT_DIR$/4.node/7.util.js" />
+    <entry file="file://$PROJECT_DIR$/4.node/8.debug.js" />
+    <entry file="file://$PROJECT_DIR$/5.module/package.json" />
+    <entry file="file://$PROJECT_DIR$/5.module/node_modules/mime/package.json" />
+    <entry file="file://$PROJECT_DIR$/5.module/useschool.js" />
+    <entry file="file://$PROJECT_DIR$/5.module/school.js" />
+    <entry file="file://$PROJECT_DIR$/5.module/node_modules/.bin/mime" />
+    <entry file="file://$PROJECT_DIR$/6.buffer/1.transfer.js" />
+    <entry file="file://$PROJECT_DIR$/7.encoding/6.encoding.js" />
+    <entry file="file://$PROJECT_DIR$/8.buffer/1.bufer.js" />
+    <entry file="file://$PROJECT_DIR$/20.cache/1.lastmodify.js" />
+    <entry file="file://$PROJECT_DIR$/20.cache/3.expire.js" />
+    <entry file="file://$PROJECT_DIR$/20.cache/index.html" />
+    <entry file="file://$PROJECT_DIR$/21.process/1.js" />
+    <entry file="file://$PROJECT_DIR$/21.process/2.spawn.js" />
+    <entry file="file://$PROJECT_DIR$/18.yargs/hello" />
+    <entry file="file://$PROJECT_DIR$/18.yargs/1.hello.js" />
+    <entry file="file://$PROJECT_DIR$/18.yargs/hello.sh" />
+    <entry file="file://$PROJECT_DIR$/21.process/test1/test1.js" />
+    <entry file="file://$PROJECT_DIR$/21.process/test1/test2.js" />
+    <entry file="file://$PROJECT_DIR$/15.http/2.response.js" />
+    <entry file="file://$PROJECT_DIR$/15.http/req.txt" />
+    <entry file="file://$PROJECT_DIR$/15.http/6/server.js" />
+    <entry file="file://$PROJECT_DIR$/15.http/5.parser.js" />
+    <entry file="file://$PROJECT_DIR$/15.http/6.server.js" />
+    <entry file="file://$PROJECT_DIR$/15.http/1.server.js" />
+    <entry file="file://$PROJECT_DIR$/.gitignore" />
+    <entry file="file://$PROJECT_DIR$/package.json" />
+    <entry file="file://$PROJECT_DIR$/15.http/9.server.js" />
+    <entry file="file://$PROJECT_DIR$/15.http/8.client.js" />
+    <entry file="file://$PROJECT_DIR$/16.http/2.server.js" />
+    <entry file="file://$PROJECT_DIR$/16.http/msg.txt" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/16.http/2.server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/17.crypto/rsa_private.key">
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/15.http/6/server.js" />
     <entry file="file://$PROJECT_DIR$/15.http/5.parser.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -685,6 +899,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="628">
           <caret line="131" column="22" selection-start-line="131" selection-start-column="12" selection-end-line="131" selection-end-column="22" />
+=======
+    <entry file="file://$PROJECT_DIR$/17.crypto/3.hmac.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+>>>>>>> 21d550b60c1de242e93707fe5ea5cef26c0a6598
           <folding />
         </state>
       </provider>
