@@ -12,4 +12,12 @@ Layer.prototype.handle_requset = function (req,res,next) {
     this.handler(req,res,next)
 }
 
+Layer.prototype.handle_err = function (err,req,res,next) {
+    if(this.handler.length == 4){
+        next()
+    }else{
+        this.handler(req,res,next)
+    }
+}
+
 module.exports = Layer

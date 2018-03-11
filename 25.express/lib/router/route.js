@@ -28,13 +28,20 @@ Route.prototype.handle_method = function (method) {
 
 Route.prototype.dispatch = function (req,res,out) {
     let idx = 0, self = this
-    function next() {
+    function next(err) {
+        if(err){
+            return out(err)
+        }
         if (idx >= self.stack.length){
             return out()
         }
         let layer = self.stack[idx++]
         if (layer.method == req.method.toLowerCase()){
-            layer.handle_requset(req,res,next)
+            if(err){
+                layer.handle_error(err,req,res,next)
+            }else{
+                layer.handle_requset(req,res,next)
+            }
         }else{
             next()
         }
