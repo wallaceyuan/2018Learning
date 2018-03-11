@@ -1,5 +1,7 @@
 const Router = require('./router')
 const http = require('http')
+const methods = require('methods')
+const slice = Array.prototype.slice
 
 function Application() {
 
@@ -10,10 +12,16 @@ Application.prototype.lazyrouter = function () {
         this._router = new Router()
     }
 }
-Application.prototype.get = function (path, handler) {
-    this.lazyrouter()
-    this._router.get(path,handler)
-}
+
+methods.forEach(function (method) {
+    Application.prototype[method] = function () {
+        this.lazyrouter()
+
+        this._router[method].apply(this._router,slice.call(arguments))// 支持多个处理函数 [ '/', [Function], [Function] ]  this._router.get(path,handler)
+        return this
+    }
+})
+
 Application.prototype.listen = function () {
     let self = this
     let server = http.createServer(function (req, res) {

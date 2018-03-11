@@ -1,6 +1,8 @@
 const url = require('url')
 const Route = require('./route')
 const Layer = require('./layer')
+const slice = Array.prototype.slice
+const methods = require('methods')
 
 function Router(){
     this.stack = []
@@ -14,10 +16,13 @@ Router.prototype.route = function (path) {//创建一层一个“门”
     return route
 }
 
-Router.prototype.get = function (path, handler) {
-    let route = this.route(path)//往router里面添加一层
-    route.get(handler)
-}
+methods.forEach(function (method) {
+    Router.prototype[method] = function (path) {
+        let route = this.route(path)//往router里面添加一层
+        route[method].apply(route,slice.call(arguments,1))
+        return this
+    }
+})
 
 Router.prototype.handle = function (req, res, out) {
     let idx = 0,self = this

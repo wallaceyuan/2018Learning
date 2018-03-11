@@ -3,6 +3,9 @@ const app = express()
 
 app.get('/',function(req,res,next) {
     console.log(1)
+    next('wrong')
+},function(req,res,next) {
+    console.log(11)
     next()
 })
 app.get('/2',function(req,res,next) {

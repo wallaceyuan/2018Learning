@@ -1,4 +1,6 @@
 const Layer = require('./layer')
+const methods = require('methods')
+const slice = Array.prototype.slice
 
 function Route(path){
     this.path = path
@@ -6,12 +8,18 @@ function Route(path){
     this.methods = {}
 }
 
-Route.prototype.get = function(handler){
-    let layer = new Layer('/', handler)
-    layer.method = 'get'
-    this.methods['get'] = true
-    this.stack.push(layer)
-}
+methods.forEach(function (method) {
+    Route.prototype[method] = function(){
+        let handlers = slice.call(arguments)
+        this.methods[method] = true
+        for(let i = 0;i<handlers.length;i++){
+            let layer = new Layer('/', handlers[i])
+            layer.method = method
+            this.stack.push(layer)
+        }
+        return this
+    }
+})
 
 Route.prototype.handle_method = function (method) {
     method = method.toLowerCase()
