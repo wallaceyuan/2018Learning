@@ -1,21 +1,28 @@
+const Router = require('./router')
 const http = require('http')
 
-const Router = require('./router')
+function Application() {
 
-function Application(params) {
-    this._router = new Router()
 }
 
+Application.prototype.lazyrouter = function () {
+    if(!this._router){
+        this._router = new Router()
+    }
+}
 Application.prototype.get = function (path, handler) {
+    this.lazyrouter()
     this._router.get(path,handler)
 }
-
 Application.prototype.listen = function () {
     let self = this
     let server = http.createServer(function (req, res) {
-        this._router.handler(req,res,done)
+        function done() {//如果没有任何路由规则匹配的话会走此函数
+            res.end(`Cannot ${req.method} ${req.url}`);
+        }
+        self._router.handle(req,res,done)
     })
-    server.listen.apply(server, arguments)
+    server.listen(...arguments)
 }
 
 module.exports = Application
