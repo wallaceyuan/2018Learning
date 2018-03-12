@@ -22,6 +22,17 @@ methods.forEach(function (method) {
     }
 })
 
+Application.prototype.route = function (path) {
+    this.lazyrouter();
+    //创建一个路由，然后创建一个layer ,layer.route = route.this.stack.push(layer)
+    this._router.route(path);
+}
+
+Application.prototype.use = function () {
+    this.lazyrouter()
+    this._router.use.apply(this._router,arguments)
+}
+
 Application.prototype.listen = function () {
     let self = this
     let server = http.createServer(function (req, res) {

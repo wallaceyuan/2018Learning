@@ -8,6 +8,11 @@ function Route(path){
     this.methods = {}
 }
 
+Route.prototype.handle_method = function (method) {
+    method = method.toLowerCase()
+    return this.methods[method]
+}
+
 methods.forEach(function (method) {
     Route.prototype[method] = function(){
         let handlers = slice.call(arguments)
@@ -21,11 +26,6 @@ methods.forEach(function (method) {
     }
 })
 
-Route.prototype.handle_method = function (method) {
-    method = method.toLowerCase()
-    return this.methods[method]
-}
-
 Route.prototype.dispatch = function (req,res,out) {
     let idx = 0, self = this
     function next(err) {
@@ -37,11 +37,7 @@ Route.prototype.dispatch = function (req,res,out) {
         }
         let layer = self.stack[idx++]
         if (layer.method == req.method.toLowerCase()){
-            if(err){
-                layer.handle_error(err,req,res,next)
-            }else{
-                layer.handle_requset(req,res,next)
-            }
+            layer.handle_request(req, res, next)
         }else{
             next()
         }

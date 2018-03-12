@@ -12,7 +12,7 @@ const app = express();
  */
 app.use(function (req, res, next) {
     console.log('Ware1:', Date.now());
-    next('Wrong');
+    next();
 });
 //路由是完整匹配的。/ != /user 所以进不来
 app.get('/', function (req, res, next) {
