@@ -1,10 +1,9 @@
-const Application = require('./application')
-const Router = require('./router')
-
-function createApplication(){
-    return new Application()
+const http = require('http');
+const url = require('url');
+const Router = require('./router');
+const Application = require('./application');
+function createApplicaton() {
+    return new Application();
 }
-
-createApplication.Router = Router
-
-module.exports = createApplication
+createApplicaton.Router = Router;
+module.exports = createApplicaton;
