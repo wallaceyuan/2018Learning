@@ -20,6 +20,7 @@ methods.forEach(function (method) {
             layer.method = method;
             this.stack.push(layer);
         }
+        this.methods[method] = true;
         return this;
     }
 });

@@ -10,6 +10,7 @@ function Router() {
     function router(req, res, next) {
         router.handle(req, res, next);
     }
+
     Object.setPrototypeOf(router, proto);
     router.stack = [];
     //声明一个对象，用来缓存路径参数名它对应的回调函数数组
@@ -19,6 +20,7 @@ function Router() {
     router.use(init);
     return router;
 }
+
 let proto = Object.create(null);
 //创建一个Route实例，向当前路由系统中添加一个层
 proto.route = function (path) {
@@ -26,9 +28,9 @@ proto.route = function (path) {
     let layer = new Layer(path, route.dispatch.bind(route));
     layer.route = route;
     this.stack.push(layer);
-
     return route;
 }
+
 proto.use = function (path, handler) {
     if (typeof handler != 'function') {
         handler = path;
@@ -37,7 +39,9 @@ proto.use = function (path, handler) {
     let layer = new Layer(path, handler);
     layer.route = undefined;//我们正是通过layer有没有route来判断是一个中间件函数还是一个路由
     this.stack.push(layer);
+    return this
 }
+
 methods.forEach(function (method) {
     proto[method] = function (path) {
         let route = this.route(path);//是在往Router里添一层
@@ -58,10 +62,17 @@ proto.param = function (name, handler) {
  */
 proto.handle = function (req, res, out) {
     //slashAdded是否添加过/ removed指的是被移除的字符串
-    let idx = 0, self = this, slashAdded = false, removed = '';
+    let idx = 0,
+        self = this,
+        slashAdded = false,
+        removed = '';
     // /user/2
     let { pathname } = url.parse(req.url, true);
     function next(err) {
+        if (slashAdded) {
+            req.url = '';
+            slashAdded = false;
+        }
         if (removed.length > 0) {
             req.url = removed + req.url;
             removed = '';
@@ -78,6 +89,10 @@ proto.handle = function (req, res, out) {
                 if (err) {
                     layer.handle_error(err, req, res, next);
                 } else {
+                    if (req.url == '') {
+                        req.url = '/';
+                        slashAdded = true;
+                    }
                     layer.handle_request(req, res, next);
                 }
             } else {

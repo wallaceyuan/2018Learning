@@ -13,11 +13,14 @@ Layer.prototype.match = function (path) {
     }
     if (!this.route) {//这一层是一个中间件层  /user/2
         // this.path = /user
+        if (this.path == '/') {
+            return true
+        }
         return path.startsWith(this.path + '/');
     }
     //如果这个Layer是一个路由的 Layer
     if (this.route) {
-        let matches = this.regexp.exec(path); //   /user/1
+        let matches = this.regexp.exec(path); //   /user/2  [ '/user/1', '1', index: 0, input: '/user/1' ]
         // ['',1,'zfpx']
         if (matches) {
             this.params = {};

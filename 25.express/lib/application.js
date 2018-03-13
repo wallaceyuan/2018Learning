@@ -30,7 +30,6 @@ Application.prototype.engine = function (ext, render) {
     this.engines[extension] = render;
 }
 
-
 methods.forEach(function (method) {
     Application.prototype[method] = function () {
         if (method == 'get' && arguments.length == 1) {
@@ -42,16 +41,13 @@ methods.forEach(function (method) {
         return this;
     }
 });
-Application.prototype.route = function (path) {
-    this.lazyrouter();
-    //创建一个路由，然后创建一个layer ,layer.route = route.this.stack.push(layer)
-    this._router.route(path);
-}
+
 //添加中间件，而中间件和普通的路由都是放在一个数组中的，放在this._router.stack
 Application.prototype.use = function () {
     this.lazyrouter();
     this._router.use.apply(this._router, arguments);
 }
+
 Application.prototype.listen = function () {
     let self = this;
     let server = http.createServer(function (req, res) {
