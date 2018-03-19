@@ -1,4 +1,9 @@
 body{
   color: red
 }
+.avatar{
+  background-image:url(./images/avatar.png);
+  width:113px;
+  height:80px; 
+}
 

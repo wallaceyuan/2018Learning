@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
-
+const WebpackWithimgPlugin = require('webpack-withimg-plugin')
 
 let pages = ['index', 'base'];
 pages = pages.map(page => new HtmlWebpackPlugin({
@@ -39,6 +39,10 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg|bmp)/,
         use: 'file-loader'
+      },
+      {
+        test:/\.(html|htm)/,
+        loader:'html-withimg-loader'
       }
     ]
   },
