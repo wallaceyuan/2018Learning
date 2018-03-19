@@ -1,6 +1,7 @@
 console.log('hello')
+let $ = require('jquery');
 
-document.getElementById('app').innerHTML = 'zfpx'
-
-
+//let $ = require('expose-loader?$!jquery');
+let i2 = require('./i2');
+$('#app').html('zfpx')
 require('./index.css')
