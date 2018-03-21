@@ -1,3 +1,1 @@
-module.exports = {
-  name:'zfpx'
-}
+export default 'hello';
