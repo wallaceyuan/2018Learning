@@ -1,2 +1,5 @@
 {
+  "favorites.resources": [
+    "33.webpack-plugin/node_modules/babel-plugin-extract"
+  ]
 }

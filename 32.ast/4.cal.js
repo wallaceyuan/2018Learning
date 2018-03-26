@@ -1,4 +1,4 @@
-let code = `const result = 1000 * 60`;
+let code = `const result = 1000 * 60 * 60 * 24`;
 let babel = require('babel-core');
 let types = require('babel-types');
 
@@ -9,6 +9,9 @@ let visitor = {
             let result = eval(node.left.value + node.operator + node.right.value)
             result = types.numericLiteral(result)
             path.replaceWith(result)
+            if(path.parentPath.node.type == 'BinaryExpression'){
+                visitor.BinaryExpression.call(null,path.parentPath);
+            }
         }
     }
 }
