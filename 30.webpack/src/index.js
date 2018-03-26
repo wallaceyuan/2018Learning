@@ -1,13 +1,18 @@
-import name from './base';
-import React from 'react';
-import ReactDOM from 'react-dom'
-import ajax from 'ajax'
-let result = ajax('/ajax')
+//import name from './base';
+//import React from 'react';
+//import ReactDOM from 'react-dom';
+//import ajax from 'ajax';
+//let result = ajax('/ajax');
 
-let fetch  = require('fetch')
-console.log(fetch);
+//ReactDOM.render(<h1>{result}</h1>, document.getElementById('root'));
+// fetch fetch.js fetch.json fetch文件夹
+//let fetch = require('fetch');
+//console.log(fetch);
+//let get = require('../dist/bundle.js');
+//get.getName();
+console.log('hello');
 
-ReactDOM.render(<h1>{name}</h1>, document.getElementById('root'));
+let name = 'zfpx';
 console.log(name);
 if (__development__ == 'development') {
     let s = 'ssssssssssssssssssssssss';
@@ -17,4 +22,3 @@ if (__development__ == 'development') {
     console.log(s);
 }
 
-console.log(name,'hello')
