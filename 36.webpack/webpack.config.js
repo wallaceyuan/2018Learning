@@ -3,8 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompilationPlugin = require('./src/plugins/CompilationPlugin')
 const HelloPlugin = require('./src/plugins/HelloPlugin');
 const EmitPlugin = require('./src/plugins/EmitPlugin');
-// const FilesPlugin = require('./src/plugins/FilesPlugin');
-// const InlinePlugin = require('./src/plugins/inline-plugin');
+const FilesPlugin = require('./src/plugins/FilesPlugin');
+const InlinePlugin = require('./src/plugins/inline-plugin');
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -57,19 +57,19 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/login.html',
-            filename: 'login.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/home.html',
-            filename: 'home.html'
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: './src/login.html',
+        //     filename: 'login.html'
+        // }),
+        // new HtmlWebpackPlugin({
+        //     template: './src/home.html',
+        //     filename: 'home.html'
+        // }),
         // new HelloPlugin({name:'zfpx'}),
         // new EmitPlugin(),
-        // new FilesPlugin({
-        //     filename:'files-list.md'
-        // }),
+        new FilesPlugin({
+            filename:'files-list.md'
+        }),
         new HtmlWebpackPlugin({
             tempalte:'./src/index.html',
             filename:'index.html'
@@ -77,7 +77,7 @@ module.exports = {
         new HelloPlugin({
             name:'zfpx'
         }),
-        new CompilationPlugin()
-        //new InlinePlugin()
+        new CompilationPlugin(),
+        new InlinePlugin()
     ]
 }
