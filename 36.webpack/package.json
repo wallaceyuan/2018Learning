@@ -2,9 +2,15 @@
   "name": "36.webpack",
   "version": "1.0.0",
   "description": "",
+<<<<<<< HEAD
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+  "main": "vscode-debugger.js",
+  "scripts": {
+    "build": "webpack --mode development"
+>>>>>>> 44d1dc1b4333e4471e358e23f4010eff12011771
   },
   "keywords": [],
   "author": "",
