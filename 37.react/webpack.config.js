@@ -1,17 +1,18 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: './src/index.js',
+    entry: './router/index.js',
     output: {
         path: path.resolve('dist'),
         filename: 'bundle.js'
     },
+    devtool:'source-map',
     module: {
         rules: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                include: path.resolve('src'),
+                include: path.resolve('router'),
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -20,6 +21,14 @@ module.exports = {
                         ]
                     }
                 }
+            },
+            {
+                test:/\.css$/,
+                use:['style-loader','css-loader']
+            },
+            {
+                test:/\.(eot|svg|jpg|png|woff|woff2|ttf)$/,
+                use:'url-loader'
             }
         ]
     },

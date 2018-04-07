@@ -1,12 +1,19 @@
+import React,{Component} from 'react';
+import ReactDOM from 'react-dom';
+import UserName from './UserName';
+import Mobile from './Mobile';
 /**
- * Created by yuanyuan on 2018/4/1.
+ * 高阶组件 而是一个普通的函数，传入一个组件，返回一个新的组件
  */
-import React,{Component} from 'react'
-import ReactDOM from 'react-dom'
 
-export default class Memo extends Component{
-    render(){
-
-
-    }
-}
+ export default class Memo extends Component{
+     render(){
+         return (
+             <div>
+                  <UserName/>
+                  <Mobile/>
+                  留言 <textarea></textarea>  
+             </div>
+         )
+     }
+ }
