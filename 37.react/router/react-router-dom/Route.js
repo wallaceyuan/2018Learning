@@ -13,6 +13,7 @@ export default class Route extends Component {
         let { path, component: Component} = this.props
         let { location:{pathname} } = this.context
         if(pathname == path || pathname.startsWith(path)){
+            console.log(pathname ,path)
             return <Component location={this.context.location} />
         }
         return null

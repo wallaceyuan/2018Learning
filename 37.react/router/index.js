@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter as Router,Route} from 'react-router-dom'
+import {HashRouter as Router,Route} from './react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './components/App'
 
@@ -13,9 +13,9 @@ let Profile = ()=><div>个人设置</div>
 
 ReactDOM.render(
     <App>
-      <Route path="/home" component={Home}></Route>
-      <Route path="/user" component={User}></Route>
-      <Route path="/profile" component={Profile}></Route>
+      <Route path="/home" component={Home} />
+      <Route path="/user" component={User} />
+      <Route path="/profile" component={Profile} />
     </App>
   ,document.querySelector('#root')
 )
