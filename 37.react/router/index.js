@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter as Router,Route} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.css';
+import App from './components/App'
 
 let Home = (props,context)=>{
   console.log(props,context)
@@ -10,12 +12,29 @@ let User = ()=><div>用户管理</div>
 let Profile = ()=><div>个人设置</div>
 
 ReactDOM.render(
-  <Router>
-    <div>
+    <App>
       <Route path="/home" component={Home}></Route>
       <Route path="/user" component={User}></Route>
       <Route path="/profile" component={Profile}></Route>
-    </div>
-  </Router>
+    </App>
   ,document.querySelector('#root')
 )
+
+
+/**
+ *
+ {
+  history:{
+    push()
+  },
+  location:{pathname:'/home'},
+  match{
+    params:{},
+    path:'/home',
+    url:'/home'
+  }
+}
+url /user/datail/1
+path /user/datail/:id
+params= {}
+ */
