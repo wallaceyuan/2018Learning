@@ -8,14 +8,25 @@ export default class HashRouter extends Component{
   }
   constructor(props){
     super(props)
-    this.state = { location: { pathname: window.location.hash.slice(1) || '/' } };
+    this.state = { location: { pathname: window.location.hash.slice(1) || '/' }, state: {}  };
   }
   getChildContext() {
+    let that = this
     return {
       location: this.state.location,
       history: {
         push(path) {
-          window.location.hash = path
+          if (typeof path == 'object') {
+            let { pathname, state } = path;
+            that.setState({
+              location: { ...that.state.location, state }
+            }, () => {
+              console.log('this.state.location.state', that.state.location.state);
+              window.location.hash = pathname;
+            });
+          } else {
+            window.location.hash = path;
+          }
         }
       }
     }
@@ -23,7 +34,7 @@ export default class HashRouter extends Component{
   componentDidMount(){
     window.location.hash = window.location.hash || '/'
     let render = ()=>{
-      this.setState({ location: { pathname: window.location.hash.slice(1) || '/' } });
+      this.setState({ location: { ...this.state.location, pathname: window.location.hash.slice(1) || '/' } });
     }
     window.addEventListener('hashchange',render)
   }

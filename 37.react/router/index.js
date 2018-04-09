@@ -1,9 +1,11 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter as Router,Route} from './react-router-dom'
+import { HashRouter as Router, Route, Switch} from './react-router-dom'
 import 'bootstrap';
 import App from './components/App'
 import User from './components/User';
+import Login from './components/Login';
+import Protected from './components/Protected'
 
 let Home = (props,context)=>{
   console.log(props,context)
@@ -14,9 +16,10 @@ let Profile = ()=><div>个人设置</div>
 
 ReactDOM.render(
     <App>
-      <Route path="/home" component={Home}></Route>
-      <Route path="/user" component={User}></Route>
-      <Route path="/profile" component={Profile}></Route>
+        <Route path="/home" component={Home} />
+        <Route path="/user" component={User} />
+        <Route path="/login" component={Login} />
+        <Protected path="/profile" component={Profile} />
     </App>
   ,document.querySelector('#root')
 )
