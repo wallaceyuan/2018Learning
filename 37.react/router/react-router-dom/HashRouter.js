@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 
-
 export default class HashRouter extends Component{
   static childContextTypes = {
     location:PropTypes.object,
@@ -9,17 +8,22 @@ export default class HashRouter extends Component{
   }
   constructor(props){
     super(props)
-    this.state = {}
+    this.state = { location: { pathname: window.location.hash.slice(1) || '/' } };
   }
   getChildContext() {
     return {
-      location: { pathname: window.location.hash.slice(1) || '/' }
+      location: this.state.location,
+      history: {
+        push(path) {
+          window.location.hash = path
+        }
+      }
     }
   }
   componentDidMount(){
     window.location.hash = window.location.hash || '/'
     let render = ()=>{
-      this.setState({ location: { ...this.state.location, pathname: window.location.hash.slice(1) || '/' } });
+      this.setState({ location: { pathname: window.location.hash.slice(1) || '/' } });
     }
     window.addEventListener('hashchange',render)
   }

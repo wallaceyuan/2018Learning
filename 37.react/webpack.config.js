@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const bootstrap = path.join(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.css')
+
 module.exports = {
     entry: './router/index.js',
     output: {
@@ -7,6 +9,11 @@ module.exports = {
         filename: 'bundle.js'
     },
     devtool:'source-map',
+    resolve: {
+        alias: {
+            'bootstrap': bootstrap
+        }
+    },
     module: {
         rules: [
             {
@@ -25,6 +32,10 @@ module.exports = {
             {
                 test:/\.css$/,
                 use:['style-loader','css-loader']
+            },
+            {
+                test:/\.less$/,
+                use: ['style-loader', 'less-loader']
             },
             {
                 test:/\.(eot|svg|jpg|png|woff|woff2|ttf)$/,

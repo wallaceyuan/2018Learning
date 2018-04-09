@@ -12,7 +12,8 @@ export default class Route extends Component {
     render(){
         let { path, component: Component} = this.props
         let { location:{pathname} } = this.context
-        if(pathname == path || pathname.startsWith(path)){
+        if (path == pathname || pathname.startsWith(path)){
+            //console.log('path,pathname', path, pathname)
             return <Component location={this.context.location} />
         }
         return null

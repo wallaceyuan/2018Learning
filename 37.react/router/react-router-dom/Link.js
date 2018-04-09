@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { relative } from 'path';
-
 export default class Link extends Component {
-    constructor(props){
-        super(props)
+    static contextTypes = {
+        history: PropTypes.object
     }
-    render(){
-        return(
-            <a>1212</a>
+    render() {
+        return (
+            <a onClick={() => this.context.history.push(this.props.to)}>{this.props.children}</a>
         )
     }
 }
