@@ -8,14 +8,25 @@ export default class HashRouter extends Component{
   }
   constructor(props){
     super(props)
-    this.state = {location:{state:{},pathname:window.location.hash.slice(1)||'/'}};
+    this.state = { location: { pathname: window.location.hash.slice(1) || '/' }, state: {}  };
   }
   getChildContext() {
+    let that = this
     return {
-      location:this.state.location,
-      history:{
-        push(path){
-          window.location.hash = path
+      location: this.state.location,
+      history: {
+        push(path) {
+          if (typeof path == 'object') {
+            let { pathname, state } = path;
+            that.setState({
+              location: { ...that.state.location, state }
+            }, () => {
+              console.log('this.state.location.state', that.state.location.state);
+              window.location.hash = pathname;
+            });
+          } else {
+            window.location.hash = path;
+          }
         }
       }
     }
