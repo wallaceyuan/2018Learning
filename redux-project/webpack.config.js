@@ -1,12 +1,9 @@
-/**
- * Created by yuan on 2018/4/16.
- */
 const path = require('path');
 
 module.exports = {
     entry: './src/index.js',
-    output:{
-        path:path.resolve('dist'),
+    output: {
+        path: path.resolve('dist'),
         filename: 'bundle.js'
     },
     devtool: 'source-map',
@@ -14,6 +11,8 @@ module.exports = {
         rules: [
             {
                 test: /\.js/,
+                exclude: /node_modules/,
+                include: path.resolve('src'),
                 use: {
                     loader: 'babel-loader',
                     options: {
