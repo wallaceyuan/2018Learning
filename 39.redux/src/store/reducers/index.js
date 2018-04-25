@@ -1,10 +1,15 @@
+import { combineReducers } from '../../redux';
 import counter from './counter';
+import counter2 from './counter2';
 // let combineReducers = reducers => (state = {}, action) => Object.keys(reducers).reduce((currentState, key) => {
 //     currentState[key] = reducers[key](state[key], action);
 //     return currentState;
 // }, {});
 //合并成应该返回一个新的函数
-export default counter;
+export default combineReducers({
+    counter,
+    counter2
+});
 /**
  * {
  * counter:{number:0},

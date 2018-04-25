@@ -22176,10 +22176,8 @@ var Counter = function (_Component) {
     _createClass(Counter, [{
         key: 'componentWillMount',
         value: function componentWillMount() {
-            var _this2 = this;
-
-            this.unsubscribe = _store2.default.subscribe(function () {
-                _this2.setState({ number: _this2.props.number });
+            this.unsubscribe = _store2.default.subscribe(function (state) {
+                //this.setState({number:this.props.number})
             });
         }
     }, {
@@ -22196,7 +22194,7 @@ var Counter = function (_Component) {
                 _react2.default.createElement(
                     'p',
                     null,
-                    this.state.number
+                    this.props.number
                 ),
                 _react2.default.createElement(
                     'button',
@@ -22215,9 +22213,11 @@ var Counter = function (_Component) {
     return Counter;
 }(_react.Component);
 
-exports.default = (0, _reactRedux.connect)(function (state) {
-    return state.Counter;
-}, _counter2.default)(Counter);
+var mapStateToProps = function mapStateToProps(state) {
+    return state.counter;
+};
+exports.default = (0, _reactRedux.connect)(mapStateToProps, //state => state.counter
+_counter2.default)(Counter);
 
 /***/ }),
 
@@ -22312,7 +22312,7 @@ exports.default = {
         return { type: types.INCREMENT };
     },
     decrement: function decrement() {
-        return { tupe: types.DECREMENT };
+        return { type: types.DECREMENT };
     }
 };
 

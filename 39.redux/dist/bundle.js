@@ -5447,6 +5447,113 @@ exports.default = Counter;
 
 /***/ }),
 
+/***/ "./src/components/Counter2.js":
+/*!************************************!*\
+  !*** ./src/components/Counter2.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionTypes = __webpack_require__(/*! ../store/action-types */ "./src/store/action-types.js");
+
+var types = _interopRequireWildcard(_actionTypes);
+
+var _store = __webpack_require__(/*! ../store */ "./src/store/index.js");
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by yuanyuan on 2018/4/16.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+function action(type) {
+    _store2.default.dispatch({ type: type });
+}
+
+var Counter = function (_Component) {
+    _inherits(Counter, _Component);
+
+    function Counter() {
+        _classCallCheck(this, Counter);
+
+        var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this));
+
+        _this.state = { number: _store2.default.getState().counter2.number };
+        return _this;
+    }
+
+    _createClass(Counter, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            this.unsubscribe = _store2.default.subscribe(function () {
+                _this2.setState({ number: _store2.default.getState().counter2.number });
+            });
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.unsubscribe();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    this.state.number
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: function onClick() {
+                            return action(types.ADD);
+                        } },
+                    '+'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: function onClick() {
+                            return action(types.MINUS);
+                        } },
+                    '-'
+                )
+            );
+        }
+    }]);
+
+    return Counter;
+}(_react.Component);
+
+exports.default = Counter;
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -5469,13 +5576,45 @@ var _Counter = __webpack_require__(/*! ./components/Counter */ "./src/components
 
 var _Counter2 = _interopRequireDefault(_Counter);
 
+var _Counter3 = __webpack_require__(/*! ./components/Counter2 */ "./src/components/Counter2.js");
+
+var _Counter4 = _interopRequireDefault(_Counter3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(_Counter2.default, null)
+    _react2.default.createElement(_Counter2.default, null),
+    _react2.default.createElement(_Counter4.default, null)
 ), document.querySelector('#root'));
+
+/***/ }),
+
+/***/ "./src/redux/combineReducers.js":
+/*!**************************************!*\
+  !*** ./src/redux/combineReducers.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (reducers) {
+    return function () {
+        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var action = arguments[1];
+        return Object.keys(reducers).reduce(function (currentState, key) {
+            currentState[key] = reducers[key](state[key], action);
+            return currentState;
+        }, {});
+    };
+};
 
 /***/ }),
 
@@ -5536,15 +5675,20 @@ exports.default = function (reducer, preloadedState) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.createStore = undefined;
+exports.combineReducers = exports.createStore = undefined;
 
 var _createStore = __webpack_require__(/*! ./createStore */ "./src/redux/createStore.js");
 
 var _createStore2 = _interopRequireDefault(_createStore);
 
+var _combineReducers = __webpack_require__(/*! ./combineReducers */ "./src/redux/combineReducers.js");
+
+var _combineReducers2 = _interopRequireDefault(_combineReducers);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.createStore = _createStore2.default;
+exports.combineReducers = _combineReducers2.default;
 
 /***/ }),
 
@@ -5637,6 +5781,44 @@ var initState = { number: 0 };
 
 /***/ }),
 
+/***/ "./src/store/reducers/counter2.js":
+/*!****************************************!*\
+  !*** ./src/store/reducers/counter2.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function () {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initState;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case types.ADD:
+            return { number: state.number + 1 };
+        case types.MINUS:
+            return { number: state.number - 1 };
+        default:
+            return state;
+    }
+};
+
+var _actionTypes = __webpack_require__(/*! ../action-types */ "./src/store/action-types.js");
+
+var types = _interopRequireWildcard(_actionTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var initState = { number: 0 };
+
+/***/ }),
+
 /***/ "./src/store/reducers/index.js":
 /*!*************************************!*\
   !*** ./src/store/reducers/index.js ***!
@@ -5651,9 +5833,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _redux = __webpack_require__(/*! ../../redux */ "./src/redux/index.js");
+
 var _counter = __webpack_require__(/*! ./counter */ "./src/store/reducers/counter.js");
 
 var _counter2 = _interopRequireDefault(_counter);
+
+var _counter3 = __webpack_require__(/*! ./counter2 */ "./src/store/reducers/counter2.js");
+
+var _counter4 = _interopRequireDefault(_counter3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5662,7 +5850,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //     return currentState;
 // }, {});
 //合并成应该返回一个新的函数
-exports.default = _counter2.default;
+exports.default = (0, _redux.combineReducers)({
+  counter: _counter2.default,
+  counter2: _counter4.default
+});
 /**
  * {
  * counter:{number:0},

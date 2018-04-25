@@ -10,8 +10,8 @@ class Counter extends Component {
         console.log('props', props)
     }
     componentWillMount(){
-        this.unsubscribe = store.subscribe(()=>{
-            this.setState({number:this.props.number})
+        this.unsubscribe = store.subscribe((state)=>{
+            //this.setState({number:this.props.number})
         })
     }
     componentWillUnmount(){
@@ -20,7 +20,7 @@ class Counter extends Component {
     render(){
         return(
             <div style={{ border: '1px solid red' }}>
-                <p>{this.state.number}</p>
+                <p>{this.props.number}</p>
                 <button onClick={this.props.increment}> + </button>
                 <button onClick={this.props.decrement}> - </button>
             </div>
@@ -28,7 +28,10 @@ class Counter extends Component {
     }
 }
 
+const mapStateToProps = (state) =>{
+    return state.counter
+}
 export default connect(
-    state=>state.Counter,
+    mapStateToProps, //state => state.counter
     actions
 )(Counter)

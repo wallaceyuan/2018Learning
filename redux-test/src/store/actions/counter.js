@@ -5,6 +5,6 @@ export default{
         return {type:types.INCREMENT}
     },
     decrement(){
-        return {tupe:types.DECREMENT}
+        return {type:types.DECREMENT}
     }
 }
