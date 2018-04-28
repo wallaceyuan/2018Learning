@@ -22221,6 +22221,99 @@ _counter2.default)(Counter);
 
 /***/ }),
 
+/***/ "./src/components/List.js":
+/*!********************************!*\
+  !*** ./src/components/List.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _store = __webpack_require__(/*! ../store */ "./src/store/index.js");
+
+var _store2 = _interopRequireDefault(_store);
+
+var _list = __webpack_require__(/*! ../store/actions/list */ "./src/store/actions/list.js");
+
+var _list2 = _interopRequireDefault(_list);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by yuan on 2018/4/28.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+var List = function (_Component) {
+    _inherits(List, _Component);
+
+    function List(props) {
+        _classCallCheck(this, List);
+
+        var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
+
+        _this.state = { number: props.number };
+        console.log('props', props);
+        return _this;
+    }
+
+    _createClass(List, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.unsubscribe = _store2.default.subscribe(function (state) {
+                //this.setState({number:this.props.number})
+            });
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.unsubscribe();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var lists = this.props.lists;
+            return _react2.default.createElement(
+                'div',
+                null,
+                lists.map(function (list) {
+                    return _react2.default.createElement(
+                        'div',
+                        { idx: list.idx, key: list.idx },
+                        list.text
+                    );
+                })
+            );
+        }
+    }]);
+
+    return List;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(function (state) {
+    return state.list;
+}, _list2.default)(List);
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -22245,6 +22338,10 @@ var _Counter = __webpack_require__(/*! ./components/Counter */ "./src/components
 
 var _Counter2 = _interopRequireDefault(_Counter);
 
+var _List = __webpack_require__(/*! ./components/List */ "./src/components/List.js");
+
+var _List2 = _interopRequireDefault(_List);
+
 var _store = __webpack_require__(/*! ./store */ "./src/store/index.js");
 
 var _store2 = _interopRequireDefault(_store);
@@ -22257,7 +22354,8 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(
         _react2.default.Fragment,
         null,
-        _react2.default.createElement(_Counter2.default, null)
+        _react2.default.createElement(_Counter2.default, null),
+        _react2.default.createElement(_List2.default, null)
     )
 ), document.getElementById('root'));
 
@@ -22313,6 +22411,37 @@ exports.default = {
     },
     decrement: function decrement() {
         return { type: types.DECREMENT };
+    }
+};
+
+/***/ }),
+
+/***/ "./src/store/actions/list.js":
+/*!***********************************!*\
+  !*** ./src/store/actions/list.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _actionTypes = __webpack_require__(/*! ../action-types */ "./src/store/action-types.js");
+
+var types = _interopRequireWildcard(_actionTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+exports.default = {
+    add_todo: function add_todo(text) {
+        return { type: types.ADD_TODO, text: text };
+    },
+    del_todo: function del_todo(idx) {
+        return { type: types.DEL_TODO, index: idx };
     }
 };
 
@@ -22403,11 +22532,61 @@ var _counter = __webpack_require__(/*! ./counter */ "./src/store/reducers/counte
 
 var _counter2 = _interopRequireDefault(_counter);
 
+var _list = __webpack_require__(/*! ./list */ "./src/store/reducers/list.js");
+
+var _list2 = _interopRequireDefault(_list);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-    counter: _counter2.default
+    counter: _counter2.default,
+    list: _list2.default
 });
+
+/***/ }),
+
+/***/ "./src/store/reducers/list.js":
+/*!************************************!*\
+  !*** ./src/store/reducers/list.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function () {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { lists: [{ text: '移动端计划', idx: 0 }] };
+    var action = arguments[1];
+
+    switch (action.type) {
+        case types.ADD_TODO:
+            state.lists.push({
+                text: action.text,
+                idx: count++
+            });
+            return { lists: state.lists };
+        case types.DEL_TODO:
+            state.lists.filter(function (list) {
+                return list.idx != types.idx;
+            });
+            return { lists: state.lists };
+        default:
+            return state;
+    }
+};
+
+var _actionTypes = __webpack_require__(/*! ../action-types */ "./src/store/action-types.js");
+
+var types = _interopRequireWildcard(_actionTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var count = 1;
 
 /***/ })
 
