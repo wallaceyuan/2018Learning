@@ -2,34 +2,30 @@
  * Created by yuan on 2018/4/28.
  */
 import React, { Component } from 'react';
-import store from '../store';
 import actions from '../store/actions/list';
 import {connect} from 'react-redux';
 
 class List extends Component {
     constructor(props){
         super(props);
-        this.state = {number:props.number}
-        console.log('props', props)
+        //console.log(props)
     }
-    componentWillMount(){
-        this.unsubscribe = store.subscribe((state)=>{
-            //this.setState({number:this.props.number})
-        })
-    }
-    componentWillUnmount(){
-        this.unsubscribe()
+    handleAdd = ()=>{
+        this.props.add_todo(this.todo.value)
+        this.todo.value = ''
     }
     render(){
-        let lists = this.props.lists
+        //console.log('list render')
         return(
             <div>
-                {/* <input onBlur={this.blur} refs="listInput"/> */}
-                {
-                    lists.map(list=>{
-                        return <div idx={list.idx} key={list.idx}>{list.text}</div>
-                    })
-                }
+                <input ref={input => this.todo = input}/><button onClick={this.handleAdd}>+</button>
+                <ul>
+                    {
+                        this.props.lists.map((list,index)=>(
+                            <li idx={index} key={index}>{list.text}</li>
+                        ))
+                    }
+                </ul>
             </div>
         )
     }

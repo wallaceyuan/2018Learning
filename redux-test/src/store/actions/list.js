@@ -5,6 +5,6 @@ export default{
         return { type: types.ADD_TODO, text: text}
     },
     del_todo(idx){
-        return {type:types.DEL_TODO,index:idx}
+        return {type:types.DEL_TODO, index: idx}
     }
 }

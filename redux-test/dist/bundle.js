@@ -22142,10 +22142,6 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _store = __webpack_require__(/*! ../store */ "./src/store/index.js");
-
-var _store2 = _interopRequireDefault(_store);
-
 var _counter = __webpack_require__(/*! ../store/actions/counter */ "./src/store/actions/counter.js");
 
 var _counter2 = _interopRequireDefault(_counter);
@@ -22166,28 +22162,13 @@ var Counter = function (_Component) {
     function Counter(props) {
         _classCallCheck(this, Counter);
 
-        var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
-
-        _this.state = { number: props.number };
-        console.log('props', props);
-        return _this;
+        return _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
     }
 
     _createClass(Counter, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            this.unsubscribe = _store2.default.subscribe(function (state) {
-                //this.setState({number:this.props.number})
-            });
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            this.unsubscribe();
-        }
-    }, {
         key: 'render',
         value: function render() {
+            //console.log('counter render')
             return _react2.default.createElement(
                 'div',
                 { style: { border: '1px solid red' } },
@@ -22214,10 +22195,16 @@ var Counter = function (_Component) {
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
+    //console.log(state.counter)
     return state.counter;
 };
-exports.default = (0, _reactRedux.connect)(mapStateToProps, //state => state.counter
-_counter2.default)(Counter);
+
+var mapDispatchToProps = function mapDispatchToProps(dispath) {
+    console.log(dispath);
+    return dispath;
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, _counter2.default)(Counter);
 
 /***/ }),
 
@@ -22240,10 +22227,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
-
-var _store = __webpack_require__(/*! ../store */ "./src/store/index.js");
-
-var _store2 = _interopRequireDefault(_store);
 
 var _list = __webpack_require__(/*! ../store/actions/list */ "./src/store/actions/list.js");
 
@@ -22268,39 +22251,45 @@ var List = function (_Component) {
     function List(props) {
         _classCallCheck(this, List);
 
+        //console.log(props)
         var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
 
-        _this.state = { number: props.number };
-        console.log('props', props);
+        _this.handleAdd = function () {
+            _this.props.add_todo(_this.todo.value);
+            _this.todo.value = '';
+        };
+
         return _this;
     }
 
     _createClass(List, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            this.unsubscribe = _store2.default.subscribe(function (state) {
-                //this.setState({number:this.props.number})
-            });
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            this.unsubscribe();
-        }
-    }, {
         key: 'render',
         value: function render() {
-            var lists = this.props.lists;
+            var _this2 = this;
+
+            //console.log('list render')
             return _react2.default.createElement(
                 'div',
                 null,
-                lists.map(function (list) {
-                    return _react2.default.createElement(
-                        'div',
-                        { idx: list.idx, key: list.idx },
-                        list.text
-                    );
-                })
+                _react2.default.createElement('input', { ref: function ref(input) {
+                        return _this2.todo = input;
+                    } }),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.handleAdd },
+                    '+'
+                ),
+                _react2.default.createElement(
+                    'ul',
+                    null,
+                    this.props.lists.map(function (list, index) {
+                        return _react2.default.createElement(
+                            'li',
+                            { idx: index, key: index },
+                            list.text
+                        );
+                    })
+                )
             );
         }
     }]);
@@ -22355,6 +22344,7 @@ _reactDom2.default.render(_react2.default.createElement(
         _react2.default.Fragment,
         null,
         _react2.default.createElement(_Counter2.default, null),
+        _react2.default.createElement('br', null),
         _react2.default.createElement(_List2.default, null)
     )
 ), document.getElementById('root'));
@@ -22491,7 +22481,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { number: 0 };
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { number: 1 };
     var action = arguments[1];
 
     switch (action.type) {
@@ -22559,17 +22549,15 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports.default = function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { lists: [{ text: '移动端计划', idx: 0 }] };
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { lists: [{ text: '移动端计划' }] };
     var action = arguments[1];
 
     switch (action.type) {
         case types.ADD_TODO:
-            state.lists.push({
-                text: action.text,
-                idx: count++
-            });
-            return { lists: state.lists };
+            return _extends({}, state, { lists: [].concat(_toConsumableArray(state.lists), [{ text: action.text }]) });
         case types.DEL_TODO:
             state.lists.filter(function (list) {
                 return list.idx != types.idx;
@@ -22586,7 +22574,7 @@ var types = _interopRequireWildcard(_actionTypes);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var count = 1;
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /***/ })
 

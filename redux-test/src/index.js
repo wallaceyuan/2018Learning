@@ -9,6 +9,7 @@ ReactDOM.render((
     <Provider store={store}>
         <React.Fragment>
             <Counter />
+            <br/>
             <List />
         </React.Fragment>
     </Provider>
