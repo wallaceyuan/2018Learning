@@ -2,13 +2,19 @@
  * Created by yuan on 2018/4/28.
  */
 import React, { Component } from 'react';
+import store from '../store';
 import actions from '../store/actions/list';
 import {connect} from 'react-redux';
 
 class List extends Component {
     constructor(props){
         super(props);
-        //console.log(props)
+    }
+    componentWillMount(){
+        this.unsubscribe = store.subscribe(()=>{});
+    }
+    componentWillUnmount(){
+        this.unsubscribe();//取消订阅
     }
     handleAdd = ()=>{
         this.props.add_todo(this.todo.value)
@@ -22,7 +28,10 @@ class List extends Component {
                 <ul>
                     {
                         this.props.lists.map((list,index)=>(
-                            <li idx={index} key={index}>{list.text}</li>
+                            <li key={index} style={{textDecoration:list.completed?'line-through':''}}>
+                                <span onDoubleClick={console.log(121)}>{list.text}</span>
+                                <button onClick={console.log(111)}></button>
+                            </li>
                         ))
                     }
                 </ul>

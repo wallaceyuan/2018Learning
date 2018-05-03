@@ -22142,6 +22142,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _store = __webpack_require__(/*! ../store */ "./src/store/index.js");
+
+var _store2 = _interopRequireDefault(_store);
+
 var _counter = __webpack_require__(/*! ../store/actions/counter */ "./src/store/actions/counter.js");
 
 var _counter2 = _interopRequireDefault(_counter);
@@ -22166,6 +22170,16 @@ var Counter = function (_Component) {
     }
 
     _createClass(Counter, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.unsubscribe = _store2.default.subscribe(function () {});
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.unsubscribe(); //取消订阅
+        }
+    }, {
         key: 'render',
         value: function render() {
             //console.log('counter render')
@@ -22195,7 +22209,6 @@ var Counter = function (_Component) {
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
-    //console.log(state.counter)
     return state.counter;
 };
 
@@ -22228,6 +22241,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _store = __webpack_require__(/*! ../store */ "./src/store/index.js");
+
+var _store2 = _interopRequireDefault(_store);
+
 var _list = __webpack_require__(/*! ../store/actions/list */ "./src/store/actions/list.js");
 
 var _list2 = _interopRequireDefault(_list);
@@ -22251,7 +22268,6 @@ var List = function (_Component) {
     function List(props) {
         _classCallCheck(this, List);
 
-        //console.log(props)
         var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
 
         _this.handleAdd = function () {
@@ -22263,6 +22279,16 @@ var List = function (_Component) {
     }
 
     _createClass(List, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.unsubscribe = _store2.default.subscribe(function () {});
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.unsubscribe(); //取消订阅
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -22285,8 +22311,13 @@ var List = function (_Component) {
                     this.props.lists.map(function (list, index) {
                         return _react2.default.createElement(
                             'li',
-                            { idx: index, key: index },
-                            list.text
+                            { key: index, style: { textDecoration: list.completed ? 'line-through' : '' } },
+                            _react2.default.createElement(
+                                'span',
+                                { onDoubleClick: console.log(121) },
+                                list.text
+                            ),
+                            _react2.default.createElement('button', { onClick: console.log(111) })
                         );
                     })
                 )
@@ -22552,7 +22583,7 @@ Object.defineProperty(exports, "__esModule", {
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.default = function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { lists: [{ text: '移动端计划' }] };
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { lists: [{ text: '移动端计划', completed: false }] };
     var action = arguments[1];
 
     switch (action.type) {

@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import store from '../store';
 import actions from '../store/actions/counter';
 import {connect} from 'react-redux';
 
 class Counter extends Component {
     constructor(props){
         super(props);
+    }
+    componentWillMount(){
+        this.unsubscribe = store.subscribe(()=>{});
+    }
+    componentWillUnmount(){
+        this.unsubscribe();//取消订阅
     }
     render(){
         //console.log('counter render')
@@ -19,7 +26,6 @@ class Counter extends Component {
 }
 
 const mapStateToProps = (state) =>{
-    //console.log(state.counter)
     return state.counter
 }
 
