@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import counter from './counter'
-import list from './list'
+import todos from './list'
 
 export default combineReducers({
     counter,
-    list
+    todos
 })

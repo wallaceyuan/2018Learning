@@ -22235,6 +22235,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -22270,9 +22272,12 @@ var List = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
 
-        _this.handleAdd = function () {
-            _this.props.add_todo(_this.todo.value);
-            _this.todo.value = '';
+        _this.handleAdd = function (e) {
+            var code = e.keyCode;
+            if (code == 13) {
+                _this.props.add_todo(_this.todo.value);
+                _this.todo.value = '';
+            }
         };
 
         return _this;
@@ -22293,18 +22298,13 @@ var List = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            //console.log('list render')
+            var t = this;
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement('input', { ref: function ref(input) {
                         return _this2.todo = input;
-                    } }),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: this.handleAdd },
-                    '+'
-                ),
+                    }, onKeyDown: this.handleAdd }),
                 _react2.default.createElement(
                     'ul',
                     null,
@@ -22314,12 +22314,41 @@ var List = function (_Component) {
                             { key: index, style: { textDecoration: list.completed ? 'line-through' : '' } },
                             _react2.default.createElement(
                                 'span',
-                                { onDoubleClick: console.log(121) },
+                                { onDoubleClick: function onDoubleClick() {
+                                        return t.props.toggle_todo(index);
+                                    } },
                                 list.text
                             ),
-                            _react2.default.createElement('button', { onClick: console.log(111) })
+                            _react2.default.createElement(
+                                'button',
+                                { onClick: function onClick() {
+                                        return t.props.del_todo(index);
+                                    } },
+                                '\u5220\u9664'
+                            )
                         );
                     })
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: function onClick() {
+                            return _this2.props.switch_type('all');
+                        }, style: { color: this.props.newType == 'all' ? 'red' : 'black' } },
+                    '\u5168\u90E8'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: function onClick() {
+                            return _this2.props.switch_type('completed');
+                        }, style: { color: this.props.newType == 'completed' ? 'red' : 'black' } },
+                    '\u53EA\u663E\u793A\u5DF2\u5B8C\u6210'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: function onClick() {
+                            return _this2.props.switch_type('uncompleted');
+                        }, style: { color: this.props.newType == 'uncompleted' ? 'red' : 'black' } },
+                    '\u53EA\u663E\u793A\u672A\u5B8C\u6210'
                 )
             );
         }
@@ -22329,7 +22358,15 @@ var List = function (_Component) {
 }(_react.Component);
 
 exports.default = (0, _reactRedux.connect)(function (state) {
-    return state.list;
+    return _extends({}, state.todos, { lists: state.todos.lists.filter(function (item) {
+            if (state.todos.newType == 'all') {
+                return item;
+            } else if (state.todos.newType == 'completed') {
+                return item.completed;
+            } else if (state.todos.newType == 'uncompleted') {
+                return !item.completed;
+            }
+        }) });
 }, _list2.default)(List);
 
 /***/ }),
@@ -22451,20 +22488,31 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _add_todo$del_todo$to;
+
 var _actionTypes = __webpack_require__(/*! ../action-types */ "./src/store/action-types.js");
 
 var types = _interopRequireWildcard(_actionTypes);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-exports.default = {
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+exports.default = (_add_todo$del_todo$to = {
     add_todo: function add_todo(text) {
         return { type: types.ADD_TODO, text: text };
     },
     del_todo: function del_todo(idx) {
         return { type: types.DEL_TODO, index: idx };
+    },
+    toggle_todo: function toggle_todo(index) {
+        return { type: types.TOGGLE_TODO, index: index };
     }
-};
+}, _defineProperty(_add_todo$del_todo$to, "del_todo", function del_todo(index) {
+    return { type: types.DEL_TODO, index: index };
+}), _defineProperty(_add_todo$del_todo$to, "switch_type", function switch_type(newType) {
+    return { type: types.SWITCH_TYPE, newType: newType };
+}), _add_todo$del_todo$to);
 
 /***/ }),
 
@@ -22561,7 +22609,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _redux.combineReducers)({
     counter: _counter2.default,
-    list: _list2.default
+    todos: _list2.default
 });
 
 /***/ }),
@@ -22583,17 +22631,24 @@ Object.defineProperty(exports, "__esModule", {
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.default = function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { lists: [{ text: '移动端计划', completed: false }] };
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { lists: [{ text: '移动端计划' }], newType: 'all' };
     var action = arguments[1];
 
     switch (action.type) {
         case types.ADD_TODO:
             return _extends({}, state, { lists: [].concat(_toConsumableArray(state.lists), [{ text: action.text }]) });
+        case types.TOGGLE_TODO:
+            return _extends({}, state, { lists: state.lists.map(function (item, index) {
+                    if (index == action.index) {
+                        item.completed = !item.completed;
+                    }
+                    return item;
+                }) });
         case types.DEL_TODO:
-            state.lists.filter(function (list) {
-                return list.idx != types.idx;
-            });
-            return { lists: state.lists };
+            return _extends({}, state, { lists: [].concat(_toConsumableArray(state.lists.slice(0, action.index)), _toConsumableArray(state.lists.slice(action.index + 1))) });
+        case types.SWITCH_TYPE:
+            console.log(_extends({}, state, { newType: action.newType }));
+            return _extends({}, state, { newType: action.newType });
         default:
             return state;
     }
