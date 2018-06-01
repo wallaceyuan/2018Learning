@@ -22253,6 +22253,10 @@ var _list2 = _interopRequireDefault(_list);
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22357,6 +22361,9 @@ var List = function (_Component) {
     return List;
 }(_react.Component);
 
+List.propTypes = {
+    lists: _propTypes2.default.array
+};
 exports.default = (0, _reactRedux.connect)(function (state) {
     return _extends({}, state.todos, { lists: state.todos.lists.filter(function (item) {
             if (state.todos.newType == 'all') {

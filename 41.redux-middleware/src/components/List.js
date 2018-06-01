@@ -5,8 +5,13 @@ import React, { Component } from 'react';
 import store from '../store';
 import actions from '../store/actions/list';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types'
+
 
 class List extends Component {
+    static propTypes = {
+        lists: PropTypes.array
+    };
     constructor(props){
         super(props);
     }

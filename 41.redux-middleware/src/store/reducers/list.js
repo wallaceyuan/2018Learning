@@ -6,9 +6,7 @@ export default function (state = { lists: [{text:'移动端计划'}],newType:'al
             return {...state,lists:[...state.lists,{text:action.text}]}
         case types.TOGGLE_TODO:
             return {...state,lists:state.lists.map((item,index)=>{
-                if(index == action.index){
-                    item.completed = !item.completed
-                }
+                if(index == action.index){item.completed = !item.completed}
                 return item
             })}
         case types.DEL_TODO:
