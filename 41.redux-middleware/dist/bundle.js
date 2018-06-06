@@ -23118,15 +23118,15 @@ var _List = __webpack_require__(/*! ./components/List */ "./src/components/List.
 
 var _List2 = _interopRequireDefault(_List);
 
-var _store = __webpack_require__(/*! ./store */ "./src/store/index.js");
+var _index = __webpack_require__(/*! ./store/index2 */ "./src/store/index2.js");
 
-var _store2 = _interopRequireDefault(_store);
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(
     _reactRedux.Provider,
-    { store: _store2.default },
+    { store: _index2.default },
     _react2.default.createElement(
         _react2.default.Fragment,
         null,
@@ -23135,6 +23135,124 @@ _reactDom2.default.render(_react2.default.createElement(
         _react2.default.createElement(_List2.default, null)
     )
 ), document.getElementById('root'));
+
+/***/ }),
+
+/***/ "./src/redux/applyMiddleWare.js":
+/*!**************************************!*\
+  !*** ./src/redux/applyMiddleWare.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.default = function () {
+    for (var _len = arguments.length, middlewares = Array(_len), _key = 0; _key < _len; _key++) {
+        middlewares[_key] = arguments[_key];
+    }
+
+    //middleware 是应用中间件 createStore是用来创建仓库 reducer是用来创建仓库
+    return function (createStore) {
+        return function (reducer) {
+            var store = createStore(reducer);
+            var _dispatch = void 0;
+            var middlewareAPI = {
+                getState: store.getState,
+                dispatch: function dispatch(action) {
+                    return _dispatch(action);
+                }
+            };
+            middlewares = middlewares.map(function (middleware) {
+                return middleware(middlewareAPI);
+            }); //return function(next)
+            _dispatch = _compose2.default.apply(undefined, _toConsumableArray(middlewares))(store.dispatch);
+            return _extends({}, store, { dispatch: _dispatch });
+        };
+    };
+};
+
+var _compose = __webpack_require__(/*! ./compose */ "./src/redux/compose.js");
+
+var _compose2 = _interopRequireDefault(_compose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } } /**
+                                                                                                                                                                                                     * Created by yuan on 2018/6/6.
+                                                                                                                                                                                                     */
+
+/***/ }),
+
+/***/ "./src/redux/compose.js":
+/*!******************************!*\
+  !*** ./src/redux/compose.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = compose;
+/**
+ * Created by yuan on 2018/6/6.
+ */
+function compose() {
+    for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
+        fns[_key] = arguments[_key];
+    }
+
+    if (fns.length == 1) return fns[0];
+    return fns.reduce(function (a, b) {
+        return function () {
+            return a(b.apply(undefined, arguments));
+        };
+    });
+}
+
+/***/ }),
+
+/***/ "./src/redux/index.js":
+/*!****************************!*\
+  !*** ./src/redux/index.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.compose = exports.applyMiddleWare = undefined;
+
+var _applyMiddleWare = __webpack_require__(/*! ./applyMiddleWare */ "./src/redux/applyMiddleWare.js");
+
+var _applyMiddleWare2 = _interopRequireDefault(_applyMiddleWare);
+
+var _compose = __webpack_require__(/*! ./compose */ "./src/redux/compose.js");
+
+var _compose2 = _interopRequireDefault(_compose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by yuan on 2018/6/6.
+ */
+exports.applyMiddleWare = _applyMiddleWare2.default;
+exports.compose = _compose2.default;
 
 /***/ }),
 
@@ -23249,6 +23367,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js");
 
 var _reducers = __webpack_require__(/*! ./reducers */ "./src/store/reducers/index.js");
@@ -23257,24 +23377,118 @@ var _reducers2 = _interopRequireDefault(_reducers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_reducers2.default);
-var dispatch = store.dispatch;
-
+//let store = createStore(rootReducer);
+//let dispatch = store.dispatch
 /*store.dispatch = function (action) {
     console.log('旧状态',store.getState())
     dispatch(action)
     console.log('新状态',store.getState())
 }*/
 
-var logger = function r(dispatch, getState) {
+var logger = function logger(_ref) {
+    var dispatch = _ref.dispatch,
+        getState = _ref.getState;
+
     return function (next) {
+        //dispatch  = store.dispatch
         return function (action) {
-            console.log('旧状态', getState());
-            next(action);
-            console.log('新状态', getState());
+            //store.dispatch
+            console.log('旧状态1', getState());
+            next(action); //dispatch(action)
+            console.log('新状态1', getState());
         };
     };
 };
+var applyMiddleware = function applyMiddleware(middleware) {
+    //middleware 是应用中间件 createStore是用来创建仓库 reducer是用来创建仓库
+    return function (createStore) {
+        return function (reducer) {
+            var store = createStore(reducer);
+            var _dispatch = void 0;
+            var middlewareAPI = {
+                getState: store.getState,
+                dispatch: function dispatch(action) {
+                    return _dispatch(action);
+                }
+            };
+            middleware = middleware(middlewareAPI); //return function(next)
+            _dispatch = middleware(store.dispatch);
+            return _extends({}, store, { dispatch: _dispatch });
+        };
+    };
+};
+var store = applyMiddleware(logger)(_redux.createStore)(_reducers2.default);
+
+window.store = store;
+exports.default = store;
+
+/***/ }),
+
+/***/ "./src/store/index2.js":
+/*!*****************************!*\
+  !*** ./src/store/index2.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js");
+
+var _reducers = __webpack_require__(/*! ./reducers */ "./src/store/reducers/index.js");
+
+var _reducers2 = _interopRequireDefault(_reducers);
+
+var _redux2 = __webpack_require__(/*! ../redux */ "./src/redux/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//let store = createStore(rootReducer);
+//let dispatch = store.dispatch
+/*store.dispatch = function (action) {
+ console.log('旧状态',store.getState())
+ dispatch(action)
+ console.log('新状态',store.getState())
+ }*/
+
+var logger1 = function logger1(_ref) {
+    var dispatch = _ref.dispatch,
+        getState = _ref.getState;
+
+    return function (next) {
+        //dispatch  = store.dispatch
+        return function (action) {
+            //store.dispatch
+            console.log('旧状态1', getState());
+            next(action); //dispatch(action)
+            console.log('新状态1', getState());
+        };
+    };
+}; /**
+    * Created by yuan on 2018/6/6.
+    */
+
+var logger2 = function logger2(_ref2) {
+    var dispatch = _ref2.dispatch,
+        getState = _ref2.getState;
+
+    return function (next) {
+        //dispatch  = store.dispatch
+        return function (action) {
+            //store.dispatch
+            console.log('旧状态2', getState());
+            next(action); //dispatch(action)
+            console.log('新状态2', getState());
+        };
+    };
+};
+
+var store = (0, _redux2.applyMiddleWare)(logger1, logger2)(_redux.createStore)(_reducers2.default);
 
 window.store = store;
 exports.default = store;

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import Counter from './components/Counter'
 import List from './components/List'
-import store from './store';
+import store from './store/index2';
 
 ReactDOM.render((
     <Provider store={store}>
