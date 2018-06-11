@@ -20,6 +20,9 @@ class Counter extends Component {
                 <p>{this.props.number}</p>
                 <button onClick={this.props.increment.bind(this,1)}> + </button>
                 <button onClick={this.props.decrement.bind(this,1)}> - </button>
+                <button onClick={this.props.thunkIncrement.bind(this,1)}> 过一秒 + 1 </button>
+                <button onClick={this.props.promiseIncrement.bind(this,1)}> promise过一秒 + 1 </button>
+                <button onClick={this.props.payloadIncrement.bind(this,1)}> payload过一秒 + 1 </button>
             </div>
         )
     }

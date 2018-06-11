@@ -22912,6 +22912,21 @@ var Counter = function (_Component) {
                     'button',
                     { onClick: this.props.decrement.bind(this, 1) },
                     ' - '
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.props.thunkIncrement.bind(this, 1) },
+                    ' \u8FC7\u4E00\u79D2 + 1 '
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.props.promiseIncrement.bind(this, 1) },
+                    ' promise\u8FC7\u4E00\u79D2 + 1 '
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.props.payloadIncrement.bind(this, 1) },
+                    ' payload\u8FC7\u4E00\u79D2 + 1 '
                 )
             );
         }
@@ -23304,6 +23319,34 @@ exports.default = {
     increment: function increment(payload) {
         return { type: types.INCREMENT, payload: payload };
     },
+    thunkIncrement: function thunkIncrement(payload) {
+        return function (dispatch, getState) {
+            setTimeout(function () {
+                dispatch({ type: types.INCREMENT, payload: payload });
+            }, 1000);
+        };
+    },
+    promiseIncrement: function promiseIncrement(payload) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve({ type: types.INCREMENT, payload: payload });
+            }, 1000);
+        });
+    },
+    payloadIncrement: function payloadIncrement(payload) {
+        return {
+            type: types.INCREMENT,
+            payload: new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    if (Math.random() > 0.5) {
+                        resolve(100);
+                    } else {
+                        reject(-100);
+                    }
+                }, 1000);
+            })
+        };
+    },
     decrement: function decrement(payload) {
         return { type: types.DECREMENT, payload: payload };
     }
@@ -23438,6 +23481,11 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /**
+                                                                                                                                                                                                                                                                   * Created by yuan on 2018/6/6.
+                                                                                                                                                                                                                                                                   */
+
+
 var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js");
 
 var _reducers = __webpack_require__(/*! ./reducers */ "./src/store/reducers/index.js");
@@ -23467,11 +23515,13 @@ var logger1 = function logger1(_ref) {
             console.log('旧状态1', getState());
             next(action); //dispatch(action)
             console.log('新状态1', getState());
+            var number = getState().counter.number;
+            if (number == 10) {
+                dispatch({ type: 'INCREMENT', payload: -10 });
+            }
         };
     };
-}; /**
-    * Created by yuan on 2018/6/6.
-    */
+};
 
 var logger2 = function logger2(_ref2) {
     var dispatch = _ref2.dispatch,
@@ -23488,7 +23538,43 @@ var logger2 = function logger2(_ref2) {
     };
 };
 
-var store = (0, _redux2.applyMiddleWare)(logger1, logger2)(_redux.createStore)(_reducers2.default);
+var thunk = function thunk(_ref3) {
+    var dispatch = _ref3.dispatch,
+        getState = _ref3.getState;
+    return function (next) {
+        return function (action) {
+            if (typeof action == 'function') {
+                action(dispatch, getState);
+            } else {
+                console.log('action', action); //Object {type: "INCREMENT", payload: 1}
+                next(action);
+            }
+        };
+    };
+};
+
+var promise = function promise(_ref4) {
+    var dispatch = _ref4.dispatch,
+        getState = _ref4.getState;
+    return function (next) {
+        return function (action) {
+            if (action.then && typeof action.then == 'function') {
+                action.then(dispatch);
+            } else if (action.payload && action.payload.then && typeof action.payload.then == 'function') {
+                action.payload.then(function (payload) {
+                    return dispatch(_extends({}, action, { payload: payload }));
+                }, function (payload) {
+                    return dispatch(_extends({}, action, { payload: payload }));
+                });
+            } else {
+                next(action);
+            }
+        };
+    };
+};
+
+//let store = applyMiddleWare(promise,thunk,logger1,logger2)(createStore)(rootReducer)
+var store = (0, _redux.createStore)(_reducers2.default, { counter: 12 }, (0, _redux2.applyMiddleWare)(promise, thunk, logger1, logger2));
 
 window.store = store;
 exports.default = store;
@@ -23510,7 +23596,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { number: 1 };
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { number: 0 };
     var action = arguments[1];
 
     switch (action.type) {
