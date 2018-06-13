@@ -5,14 +5,14 @@ import React, { Component } from 'react';
 import actions from '../store/actions';
 import {connect} from 'react-redux';
 
-class Counter extends Component{
+class Login extends Component{
     render(){
         console.log(this.props)
         return(
-            <div>
+            <form >
                 <p>{this.props.number}</p>
                 <button onClick={this.props.increment}> 加1</button>
-            </div>
+            </form>
         )
     }
 }
