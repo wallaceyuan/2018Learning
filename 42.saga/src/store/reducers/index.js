@@ -2,8 +2,10 @@
  * Created by yuan on 2018/6/13.
  */
 import { combineReducers } from 'redux'
-import counter from './counter';
+import { routerReducer } from 'react-router-redux';
+import user from './user';
 
 export default combineReducers({
-    counter
+    user,
+    root:routerReducer
 })

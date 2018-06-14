@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import actions from '../store/actions';
 import {connect} from 'react-redux';
 
-class Login extends Component{
+class Loginout extends Component{
     render(){
         handleSubmit = (event)=>{
             event.preventDefault()
@@ -14,11 +14,11 @@ class Login extends Component{
             this.props.login(username,password)
         }
         return(
-            <form onSubmit={this.handleSubmit}>
-                用户名:<input type="text" ref={input=>this.username = input} /><br/>
-                密码:<input type="text" ref={input=>this.password = input} /><br/>
-                <input type="submit"/>
-            </form>
+            <div>
+                token:{this.props.token}
+                error:{this.props.error}
+                <button onClick={this.props.logout}>退出</button>
+            </div>
         )
     }
 }
@@ -26,4 +26,4 @@ class Login extends Component{
 export default connect(
     state=>state.user,
     actions
-)(Login)
+)(Loginout)
