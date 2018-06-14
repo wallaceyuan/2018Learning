@@ -3,8 +3,9 @@
  */
 
 import Login from './Login'
-import Login from './Loginout'
+import LogOut from './LogOut'
 
 export {
-    Login
+    Login,
+    LogOut
 }

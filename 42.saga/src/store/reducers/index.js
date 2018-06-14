@@ -7,5 +7,5 @@ import user from './user';
 
 export default combineReducers({
     user,
-    root:routerReducer
+    router:routerReducer
 })

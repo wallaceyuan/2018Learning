@@ -4,17 +4,16 @@ import createSagaMilldeware from 'redux-saga'
 import { rootSaga } from  '../sagas'
 
 
-import createHistory from 'history/createHashHistory';
 import { routerMiddleware } from 'react-router-redux'
+import createHistory from 'history/createHashHistory';
 const history = createHistory();
-const router = routerMiddleware(history);
-
+const middlewareRouter = routerMiddleware(history);
 
 
 let sagaMiddleware = createSagaMilldeware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-let store = createStore(rootReducer,composeEnhancers(applyMiddleware(sagaMiddleware,router)));
+let store = createStore(rootReducer,composeEnhancers(applyMiddleware(sagaMiddleware,middlewareRouter)));
 
 sagaMiddleware.run(rootSaga,store)
 

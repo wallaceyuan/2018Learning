@@ -3,7 +3,7 @@
  */
 import * as types from '../action-types'
 
-export default function(state = {token,error}, action) {
+export default function(state = {token:'',error:''}, action) {
     switch(action.type){
         case types.LOGIN_SUCCESS:
             return {...state,token:action.token};
