@@ -11,7 +11,6 @@ let Api = {
     login(username,password){
         return new Promise(function (resolve,reject) {
             resolve(username+password)
-            console.log('login resolve');
         })
     }
 }
@@ -39,8 +38,14 @@ function* loginFlow() {
     }
 }
 
+function* watchAction(getState) {
+    console.log(getState)
+    yield takeEvery('*',function (action) {
+        console.log(action)
+        console.log(getState())
+    })
+}
+
 export function* rootSaga({dispatch,getState}) {
-    yield all([
-        loginFlow(),
-    ])
+    yield all([loginFlow(),watchAction(getState)])
 }

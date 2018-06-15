@@ -8,8 +8,8 @@ import {connect} from 'react-redux';
 class Login extends Component{
     handleSubmit = (event)=>{
         event.preventDefault()
-        let username = this.username
-        let password = this.password
+        let username = this.username.value;
+        let password = this.password.value;
         this.props.login(username,password)
     }
     render(){
