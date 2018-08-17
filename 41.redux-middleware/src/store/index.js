@@ -1,22 +1,8 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers'
+import { compose } from '../../compose'
 
-/*
-let store = createStore(rootReducer);
-let dispatch = store.dispatch
-store.dispatch = function (action) {
-    console.log('旧状态',store.getState())
-    dispatch(action)
-    console.log('新状态',store.getState())
-}
-*/
-
-let middlewareAPI = {
-    getState:store.getState,
-    dispatch:action =>dispatch(action)
-}
-
-let logger = function({dispatch,getState}) {
+let logger1 = function({dispatch,getState}) {
     return function (next) {//dispatch  = store.dispatch
         return function (action) {//store.dispatch
             console.log('旧状态1',getState())
@@ -27,13 +13,13 @@ let logger = function({dispatch,getState}) {
 }
 
 let logger2 = ({dispatch,getState}) => next => action =>{
-    console.log('旧状态1',getState())
+    console.log('旧状态2',getState())
     next(action)//dispatch(action)
-    console.log('新状态1',getState())
+    console.log('新状态2',getState())
 }
 
-
-/*let applyMiddleware = function (middleware) {//middleware 是应用中间件 createStore是用来创建仓库 reducer是用来创建仓库
+/*
+let applyMiddleware = function (middleware) {//middleware 是应用中间件 createStore是用来创建仓库 reducer是用来创建仓库
     return function (createStore) {
         return function (reducer) {
             let store = createStore(reducer)
@@ -48,16 +34,14 @@ let logger2 = ({dispatch,getState}) => next => action =>{
         }
     }
 }
-//let store = applyMiddleware(logger)(createStore)(rootReducer)
-
+*/
 
 let store = createStore(
     rootReducer,
-    //initialState
-    applyMiddleWare(logger)
-)*/
+    applyMiddleware(logger1,logger2)
+)
 
-
+//let store = applyMiddleware(logger1)(createStore)(rootReducer)
 window.store = store;
 export default store;
 
