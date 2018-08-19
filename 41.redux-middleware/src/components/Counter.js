@@ -13,6 +13,24 @@ class Counter extends Component {
     componentWillUnmount(){
         this.unsubscribe();//取消订阅
     }
+    promiseClick(){
+        const { dispatch } = this.props
+        console.log('过一秒要加11啦')
+
+        this.props.payloadIncrement(1)
+/*
+        var aaa = this.props.test
+        aaa.then(res=>{
+            console.log(res)
+        })*/
+    }
+    bbb(){
+        new Promise(function (resolve,reject) {
+            setTimeout(function () {
+                resolve(1)
+            },1000)
+        })
+    }
     render(){
         //console.log('counter render')
         return(
@@ -22,7 +40,7 @@ class Counter extends Component {
                 <button onClick={this.props.decrement.bind(this,1)}> - </button>
                 <button onClick={this.props.thunkIncrement.bind(this,1)}> 过一秒 + 1 </button>
                 <button onClick={this.props.promiseIncrement.bind(this,1)}> promise过一秒 + 1 </button>
-                <button onClick={this.props.payloadIncrement.bind(this,1)}> payload过一秒 + 1 </button>
+                <button onClick={this.promiseClick.bind(this)}> payload过一秒 + 1 </button>
             </div>
         )
     }

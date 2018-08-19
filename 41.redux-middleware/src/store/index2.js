@@ -5,14 +5,6 @@ import { createStore } from 'redux'
 import rootReducer from './reducers'
 import { applyMiddleWare } from '../redux'
 
-//let store = createStore(rootReducer);
-//let dispatch = store.dispatch
-/*store.dispatch = function (action) {
- console.log('旧状态',store.getState())
- dispatch(action)
- console.log('新状态',store.getState())
- }*/
-
 let logger1 = function({dispatch,getState}) {
     return function (next) {//dispatch  = store.dispatch
         return function (action) {//store.dispatch

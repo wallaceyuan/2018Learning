@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers'
 import { compose } from '../../compose'
+import thunk from 'redux-thunk'
 
 let logger1 = function({dispatch,getState}) {
     return function (next) {//dispatch  = store.dispatch
@@ -38,7 +39,7 @@ let applyMiddleware = function (middleware) {//middleware 是应用中间件 cre
 
 let store = createStore(
     rootReducer,
-    applyMiddleware(logger1,logger2)
+    applyMiddleware(thunk,logger1,logger2)
 )
 
 //let store = applyMiddleware(logger1)(createStore)(rootReducer)
