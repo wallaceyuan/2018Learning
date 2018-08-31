@@ -20,7 +20,7 @@ module.exports = {
     module: {
         rules: 
         [
-            /* {
+            {
                 test: /\.js$/,
                 use: {
                     loader:path.resolve(__dirname, 'src', 'loaders', 'log-loader'),
@@ -28,7 +28,7 @@ module.exports = {
                         content:'===============loading=================='
                     }
                 }
-            }, */
+            },
             /*   {
                   test: /\.js$/,
                   use: {
@@ -69,10 +69,10 @@ module.exports = {
         new FilesPlugin({
             filename:'files-list.md'
         }) */
-        new HtmlWebpackPlugin({
+        /*new HtmlWebpackPlugin({
             tempalte:'./src/index.html',
             filename:'index.html'
         }),
-        new InlinePlugin()
+        new InlinePlugin()*/
     ]
 }
