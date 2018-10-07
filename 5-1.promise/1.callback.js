@@ -39,12 +39,47 @@ console.log(util.isString('hello'))
 //2.传统的callback promise
 //lodash after async Promise.all
 
-after(3,function () {
+let fn = after(3,function () {
     console.log('调用了三次才执行')
 })
+fn()
+fn()
+fn()
 
 
+function after(times,callback){
+    return function () {
+        console.log(times);
+        if(--times == 0){
+            callback()
+        }
+    }
+}
 
+let fs = require('fs');
 
+//发布订阅 订阅(先把他暂存起来)
+let event = {
+    arr:[],
+    result:[],
+    on(fn){
+        this.arr.push(fn)
+    },
+    emit(data){
+        this.result.push(data)
+        this.arr.forEach(fn=>fn(this.result))
+    }
+}
 
+event.on(function (data) {
+    if(data.length === 2){
+        console.log(data)
+    }
+})
 
+fs.readFile('1.txt','utf8',function (err,data) {
+    event.emit(data)
+})
+fs.readFile('2.txt','utf8',function (err,data) {
+    event.emit(data)
+})
