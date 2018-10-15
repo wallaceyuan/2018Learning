@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ball {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50px;
+            left:0;
+        }
+
+        div:nth-child(1) {
+            top: 0;
+        }
+
+        div:nth-child(2) {
+            top: 120px;
+        }
+
+        div:nth-child(3) {
+            top: 240px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="ball"></div>
+<div class="ball"></div>
+<div class="ball"></div>
+
+<script>
+
+    let balls = document.querySelectorAll('.ball')
+
+    function move(ele,distance) {
+        return new Promise((resolve,reject)=>{
+            let moveX = 0
+            let interval = setInterval(()=>{
+                moveX++;
+                ele.style.left = moveX + 'px'
+                if(moveX === distance){
+                    resolve(moveX);
+                    clearInterval(interval)
+                }
+            },1)
+        })
+    }
+
+    async function moveBalls() {
+        let a = await move(balls[0],500)
+        console.log(a);
+        let b = await move(balls[1],400)
+        console.log(b);
+        let c = await move(balls[2],300)
+        console.log(c);
+    }
+
+    moveBalls().then(()=>{
+        console.log('成功')
+    })
+
+    /*move(balls[0],500,function () {
+        move(balls[1],500,function () {
+            move(balls[2],500,function () {
+                console.log('成功')
+            })
+        })
+    })*/
+
+</script>
+</body>
+</html>

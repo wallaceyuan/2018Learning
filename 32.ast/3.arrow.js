@@ -8,6 +8,7 @@ let visitor = {
     ArrowFunctionExpression(path){
         console.log(path.type)
         let params = path.node.params
+        console.log(path.node.params)
 
         let blockStatement = types.blockStatement([
             types.returnStatement(path.node.body)
@@ -20,10 +21,9 @@ let visitor = {
     }
 }
 
-let arrayPlugin = { visitor }
 let result = babel.transform(code,{
     plugins:[
-        arrayPlugin
+        { visitor }
     ]
 })
-console.log(result.code)
+console.log('result',result.code)

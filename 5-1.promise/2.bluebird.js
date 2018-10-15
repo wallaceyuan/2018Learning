@@ -23,13 +23,15 @@ read('../1.txt', 'utf-8').then(data=> {
 
 
 function promisifyAll(obj) {
-    Object.keys(obj).forEach(fn=>{
-        console.log(fn)
+    Object.keys(obj).forEach(key=>{
+        if(typeof obj[key] === 'function'){
+            obj[key+'Async'] = promisify(obj[key])
+        }
     })
 }
 
 promisifyAll(fs)
-//bluebird.promisifyAll(fs)
+
 fs.readFileAsync('../1.txt', 'utf-8').then(data=> {
     console.log('readFileAsync', data)
 })
