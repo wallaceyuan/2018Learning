@@ -1,19 +1,19 @@
 /**
  * Created by yuanyuan on 2018/10/9.
  */
-/*
- function *say () {
- yield 1
- yield 2
- yield 3
- }
+function *say() {
+    yield 1
+    yield 2
+    yield 3
+}
 
 
- let it = say() //it 就是iterator 迭代器
+let it = say() //it 就是iterator 迭代器
 
- let obj = it.next()
- console.log(obj)*/
+let obj = it.next()
+console.log(obj)
 
+//var co = require('co');
 
 function *say() {
     let a = yield "去厕所1"
@@ -24,8 +24,8 @@ function *say() {
 
 let it = say()
 console.log(1, it.next())
-console.log(2, it.next('aaa'))
-console.log(3, it.next('bbb'))
+console.log(2, it.next())
+console.log(3, it.next())
 
 
 function gen() {
@@ -46,24 +46,40 @@ let read = bluebird.promisify(fs.readFile)
 //generator + co
 function *r() {
     let r1 = yield read('1.txt', 'utf-8')
+    console.log('r1', r1); //r1 2.txt
     let r2 = yield read(r1, 'utf-8')
+    console.log('r2', r2); //r2 3.txt
     let r3 = yield read(r2, 'utf-8')
+    console.log('r3', r3); //r3 hello
     return r3
 }
+
+const it_r = r()
+it_r.next().value.then(d1=> {
+    return it_r.next(d1).value
+}).then(d2=> {
+    return it_r.next(d2).value
+}).then(d3=> {
+    return it_r.next(d3).value
+}).then(data=> {
+    console.log(data) // hello
+})
 
 function co(it) {
     return new Promise((resolve, reject)=> {
         function next(data) {
             let {value, done} = it.next(data)
-            if(done){
+            if (done) {
                 resolve(value)
-            }else{
+            } else {
                 value.then(data=> {
                     next(data)
-                },reject)
+                }, reject)
             }
         }
+
         next()
+
         /*let {value, done} = it.next()
         value.then(data=> {
             console.log(data)
@@ -73,7 +89,7 @@ function co(it) {
                 let {value, done} = it.next(data)
                 value.then(data=> {
                     let {value, done} = it.next(data)
-                    if(done)resolve(value)
+                    if (done)resolve(value)
                 })
             })
         })*/

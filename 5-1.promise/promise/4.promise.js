@@ -75,7 +75,6 @@ function resolvePromise(promise2, x, resolve, reject) {
 //then调用的时候 都是异步调用 (原生的then的成功或者失败 是一个微任务)
 Promise.prototype.then = function (onFulfilled, onRejected) {
     //成功和失败的函数 是可选参数
-
     onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : val=>val;
     onRejected = typeof onRejected === 'function' ? onRejected : (e)=> {throw e};
     let self = this

@@ -29,11 +29,10 @@ function read(filePath,encoding) {
 read('../1.txt','utf8').then(data=>{
     return read('../2.txt','utf8')
 }).then(data=>{
-    return data.split('').re    .then(data=>{throw new Everse().join('')
+    return data.split('').reverse().join('')
 }).then(data=>{
     throw new Error('出错')
 }).then()
     .then(data=>{console.log(data)},()=>{console.log('xxx')})
     .catch(err=>{console.log('catch')})
     .then(data=>{throw new Error()})
-rror()})
