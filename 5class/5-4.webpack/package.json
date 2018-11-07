@@ -2,15 +2,15 @@
   "name": "5-4.webpack",
   "version": "1.0.0",
   "description": "webpack test",
-  "main": "debugger.js",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack --mode development"
+  },
   "dependencies": {},
   "devDependencies": {
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
-  },
-  "scripts": {
-    "build": "webpack --mode development"
   },
   "author": "",
   "license": "ISC"
