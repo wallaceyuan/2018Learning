@@ -30,6 +30,7 @@ class Compiler{
                 filename
             }
         } = this.options;
+
         fs.writeFileSync(path.join(dist, filename), main);
     }
     buildModule(modulePath, isEntry) {
@@ -44,28 +45,7 @@ class Compiler{
         dependencies.forEach(dependency => this.buildModule(path.join(this.root, dependency)))
     }
     getSource(modulePath) {
-        let that = this
-        let source = fs.readFileSync(modulePath, 'utf8')
-        let {module: {rules}} = this.options;
-        for (let i = 0; i < rules.length; i++) {
-            let rule = rules[i];
-            if (rule.test.test(modulePath)) {
-                let loaders = rule.use;
-                let loaderIndex = loaders.length - 1;
-
-                function iterateLoaders() {
-                    let loaderName = loaders[loaderIndex--].loader;
-                    let loader = require(path.resolve(that.root, 'node_modules', loaderName));
-                    source = loader(source);
-                    if (loaderIndex >= 0) {
-                        iterateLoaders();
-                    }
-                }
-                iterateLoaders();
-                break;
-            }
-        }
-        return source;
+        return fs.readFileSync(modulePath,'utf8')
     }
     parse(source, parentPath) {
         let that = this;

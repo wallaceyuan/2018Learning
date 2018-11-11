@@ -20,9 +20,18 @@
         
               "./src/index.js":
               (function (module, exports,__webpack_require__) {
-                eval(`let a = __webpack_require__("./src/a.js");
+                eval(`__webpack_require__("./src/index.less");
+
+let a = __webpack_require__("./src/a.js");
 
 alert(a);`);
+              }),
+           
+              "./src/index.less":
+              (function (module, exports,__webpack_require__) {
+                eval(`let style = document.createElement('style');
+style.innerHTML = "body {\\n  background: red;\\n}\\n";
+document.head.appendChild(style);`);
               }),
            
               "./src/a.js":

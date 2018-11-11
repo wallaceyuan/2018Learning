@@ -7,5 +7,26 @@ module.exports = {
         path:path.resolve('dist'),
         filename:'bundle.js'
     },
+    resolveLoader: {
+        modules: [
+            'node_modules',
+            path.resolve(__dirname, 'src', 'loaders')
+        ]
+    },
+    module:{
+        rules: [
+            {
+                test: /\.less$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'less-loader',
+                    }
+                ]
+            }
+        ]
+    },
     plugins:[]
 }
