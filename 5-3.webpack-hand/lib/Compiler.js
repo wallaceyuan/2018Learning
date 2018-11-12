@@ -5,10 +5,33 @@ const t = require('babel-types');
 const generate = require('babel-generator').default;
 const traverse = require('babel-traverse').default;
 const ejs = require('ejs');
+const {SyncHook} = require('tapable');
 
 class Compiler{
     constructor(options) {
         this.options = options
+        this.hooks = {
+            entryOption: new SyncHook(),
+            afterPlugins: new SyncHook(),
+            run: new SyncHook(),
+            compile: new SyncHook(),
+            afterCompile: new SyncHook(),
+            emit: new SyncHook(["compiler"]),
+            afterEmit: new SyncHook(),
+            done: new SyncHook()
+        }
+        let plugins = options.plugins;
+        if (plugins && plugins.length > 0) {
+            plugins.forEach(plugin => plugin.apply(this));
+        }
+        this.hooks.entryOption.call();
+        this.hooks.afterPlugins.call();
+        this.hooks.run.call();
+        this.hooks.compile.call();
+        this.hooks.afterCompile.call();
+        this.hooks.emit.call();
+        this.hooks.afterEmit.call();
+        this.hooks.done.call();
     }
     run(){
         //确定入口：根据配置中的 entry 找出所有的入口文件；
