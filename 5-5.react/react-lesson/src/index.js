@@ -1,47 +1,51 @@
-import React,{Component} from 'react';
-import {render} from 'react-dom';
-import PropTypes from 'prop-types'; // ES6
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+/*import App from './App';
+import * as serviceWorker from './serviceWorker';*/
+//ReactDOM.render(<label className="test" htmlFor='hello'>hello<span>world</span></label>, document.getElementById('root'));
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+//serviceWorker.unregister();
 
-class Person extends Component{
-    static defaultProps = {
-        name:'zfpx'
-    }
-    static propTypes = {
-        name:PropTypes.string.isRequired
-    }
-    constructor(props){
-        super(props)
-        console.log(props)
-        this.state = {
-            age:props.age
-        }
-    }
-    componentDidMount(){
-        setInterval(()=>{
-            this.setState({
-                time:new Date().toLocaleString()
-            })
-        },1000)
-    }
-    handleClick=()=>{
-        this.setState((prevState)=>({age:prevState.age+1}))
-        this.setState((prevState)=>({age:prevState.age+1}))
-    }
-    render(){
-        const {age} = this.state
-        return(
-            <div onClick={this.handleClick}>{age}</div>
-        )
+/*let React = {
+    createElement(type, props, ...children){
+        return {type, props, children}
     }
 }
+let el = <h1 name="yy">hello<span>world</span></h1>
 
-//属性校验
-let obj = {
-    name:'zfpx',
-    age:9,
-    hobby:['游泳','跑步'],
-    pos:{x:433,y:822},
-    salary:3000
-}
+render(el, document.getElementById('root'))
 
-render(<Person {...obj}/>, document.getElementById('root'));
+function render(vnode, container) {
+    if (typeof vnode === 'string') return container.appendChild(document.createTextNode(vnode))
+    let {type, props, children} = vnode
+    let tag = document.createElement(type)
+    for (let key in props) {
+        tag.setAttribute(key, props[key])
+    }
+    children.forEach(child=> {
+        render(child, tag)
+    })
+    container.append(tag)
+}*/
+//React.createElement(<h1 name="yy">hello<span>world</span></h1>, document.getElementById('root'));
+
+const aa = React.createElement(
+    'span',
+    null,
+    'world'
+)
+
+ReactDOM.render(
+    React.createElement(
+        'label',
+        {htmlFor:'hello',className:'test'},
+        'hello',
+        aa
+    ),
+    document.getElementById('root')
+);
+
+console.log('aa',aa)

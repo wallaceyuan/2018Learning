@@ -14,16 +14,25 @@ class Compiler {
         if (plugins && plugins.length > 0) {
             plugins.forEach(plugin => plugin.apply(this));
         }
+    }
+    run(){
         console.time('cost');
-        this.hooks.accelerate.call('hello');
+        this.accelerate('hello')
+        this.break()
+        this.calculateRoutes('i', 'like', 'tapable')
+    }
+    accelerate(param){
+        this.hooks.accelerate.call(param);
+    }
+    break(){
         this.hooks.break.call();
-        this.hooks.calculateRoutes.callAsync('i', 'like', 'tapable', err => {
+    }
+    calculateRoutes(){
+        const args = Array.from(arguments)
+        this.hooks.calculateRoutes.callAsync(...args, err => {
             console.timeEnd('cost');
             if (err) console.log(err)
         });
-    }
-    run(){
-
     }
 }
 

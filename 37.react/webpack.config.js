@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const bootstrap = path.join(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.css')
 
 module.exports = {
-    entry: './router/index.js',
+    entry: './src/index.js',
     output: {
         path: path.resolve('dist'),
         filename: 'bundle.js'
