@@ -8,29 +8,6 @@ import React from 'react';
 // Learn more about service workers: http://bit.ly/CRA-PWA
 //serviceWorker.unregister();
 
-/*let React = {
- createElement(type, props, ...children){
- return {type, props, children}
- }
- }
- let el = <h1 name="yy">hello<span>world</span></h1>
-
- render(el, document.getElementById('root'))
-
- function render(vnode, container) {
- if (typeof vnode === 'string') return container.appendChild(document.createTextNode(vnode))
- let {type, props, children} = vnode
- let tag = document.createElement(type)
- for (let key in props) {
- tag.setAttribute(key, props[key])
- }
- children.forEach(child=> {
- render(child, tag)
- })
- container.append(tag)
- }*/
-//React.createElement(<h1 name="yy">hello<span>world</span></h1>, document.getElementById('root'));
-
 let render = (vNode,container)=>{
     let {type,props} = vNode;
     let elementNode = document.createElement(type); // 创建第一个元素
