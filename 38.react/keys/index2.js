@@ -94,8 +94,14 @@ function diff(oldChildren, newChildren) {
             insert(newIndex, newKey);
             newIndex++;
         } else if (oldKey != newKey) {
-            insert(newIndex, newKey);
-            newIndex++;
+            let nextOldKey = (oldChildren[oldIndex + 1] || {}).key;
+            if (nextOldKey == newKey) {
+                remove(newIndex);
+                oldChildren.splice(oldIndex, 1);
+            } else {
+                insert(newIndex, newKey);
+                newIndex++;
+            }
         } else {
             oldIndex++;
             newIndex++;
