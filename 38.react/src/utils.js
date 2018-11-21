@@ -8,6 +8,7 @@ let utils = {
     REMOVE : 'REMOVE',//节点被移除
     TEXT : 'TEXT',//文本内容改变
     ADD:'ADD',
+    INSERT:'INSERT',
     setAttribute(element, attr, value){
         switch (attr) {
             case 'style':

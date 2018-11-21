@@ -1,53 +1,7 @@
-//let utils = require('./utils')
+let createElement = require('./element');
+let utils = require('./utils')
 
-const REMOVE = "REMOVE"
-const INSERT = "INSERT"
-
-class Element {
-    constructor(tagName, key, children) {
-        this.tagName = tagName;
-        this.key = key;
-        this.children = children || [];
-    }
-
-    render() {
-        console.log('render')
-        let element = document.createElement(this.tagName);
-        element.innerHTML = this.children
-        element.setAttribute('key', this.key)
-        return element;
-    }
-}
-
-function el(tagName, key, children) {
-    return new Element(tagName, key, children)
-}
-
-let oldTree = [
-    el('li', 'A', 'A'),
-    el('li', 'B', 'B'),
-    el('li', 'C', 'C'),
-    el('li', 'D', 'D'),
-]
-
-let ul = document.createElement('ul')
-
-oldTree.forEach(item=>ul.appendChild(item.render()))
-
-document.body.appendChild(ul)
-
-let newChildren = [
-    el('li', 'D', 'D'),
-    el('li', 'C', 'C'),
-    el('li', 'B', 'B'),
-    el('li', 'A', 'A'),
-]
-
-let patches = diff(oldTree, newChildren)
-console.log(patches)//[{type:'REMOVE',index:0},{type:'INSERT',index:3,key:'E'}]
-patch(ul, patches)
-
-function patch(root, patches = []) {
+function childPatch(root, patches = []) {
 
     let nodeMap = {};
 
@@ -58,7 +12,7 @@ function patch(root, patches = []) {
     patches.forEach(path=> {
         let oldNode
         switch (path.type) {
-            case INSERT:
+            case utils.INSERT:
                 let newNode = nodeMap[path.node.key] || path.node.render()
                 oldNode = root.childNodes[path.index]
                 if (oldNode) {
@@ -67,7 +21,7 @@ function patch(root, patches = []) {
                     root.appendChild(newNode)
                 }
                 break;
-            case REMOVE:
+            case utils.REMOVE:
                 oldNode = root.childNodes[path.index]
                 if (oldNode) {
                     root.removeChild(oldNode)
@@ -79,7 +33,7 @@ function patch(root, patches = []) {
     })
 }
 
-function diff(oldChildren, newChildren) {
+function childDiff(oldChildren, newChildren) {
     let patches = []
     let newKeys = newChildren.map(item=>item.key)
     let oldIndex = 0;
@@ -93,14 +47,14 @@ function diff(oldChildren, newChildren) {
         }
     }
 
-
     oldIndex = 0;
     newIndex = 0;
+
     while (newIndex < newChildren.length) {
         let newKey = (newChildren[newIndex] || {}).key;
         let oldKey = (oldChildren[oldIndex] || {}).key;
         if (!oldKey) {
-            insert(newIndex, newKey);
+            insert(newIndex,newChildren[newIndex]);
             newIndex++;
         } else if (oldKey != newKey) {
             let nextOldKey = (oldChildren[oldIndex + 1] || {}).key;
@@ -108,7 +62,7 @@ function diff(oldChildren, newChildren) {
                 remove(newIndex);
                 oldChildren.splice(oldIndex, 1);
             } else {
-                insert(newIndex, newKey);
+                insert(newIndex, newChildren[newIndex]);
                 newIndex++;
             }
         } else {
@@ -121,13 +75,18 @@ function diff(oldChildren, newChildren) {
         remove(newIndex)
     }
 
-    function insert(index, key) {
-        patches.push({type: INSERT, index, node: el('li', key, key)});
+    function insert(index,element) {
+        patches.push({type: utils.INSERT, index, node: createElement('li', element.attrs, element.key, element.children)});
     }
 
     function remove(index) {
-        patches.push({type: REMOVE, index})
+        patches.push({type: utils.REMOVE, index})
     }
 
     return patches
+}
+
+module.exports = {
+    childDiff,
+    childPatch
 }
