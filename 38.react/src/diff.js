@@ -2,13 +2,14 @@
  * Created by yuan on 2018/11/20.
  */
 let utils = require('./utils')
+let {childDiff, childPatch} = require('./childDiff')
 let keyIndex = 0;
 
-function diff(oldTree, newTree) {
+function diff(oldTree, newTree, root) {
     keyIndex = 0;
     let patches = {};
     let index = 0;
-    walk(oldTree, newTree, index, patches);
+    walk(oldTree, newTree, index, patches, root);
     return patches;
 }
 
@@ -20,8 +21,7 @@ function diff(oldTree, newTree) {
  * @param {*} patches 补丁对象
  */
 
-function walk(oldNode, newNode, index, patches) {
-    console.log('====', oldNode, newNode, index, patches)
+function walk(oldNode, newNode, index, patches, root) {
     let currentPatch = [];
     if (newNode == null) {
         currentPatch.push({type: utils.REMOVE, index})
@@ -36,7 +36,9 @@ function walk(oldNode, newNode, index, patches) {
         if (Object.keys(attrsPatch).length > 0) {
             currentPatch.push({type: utils.ATTRS, node: attrsPatch});
         }
-        diffChildren(oldNode.children, newNode.children, index, patches);
+        let childPatches = diffChildren(oldNode.children, newNode.children, index, patches);
+        console.log(childPatches)//[{type:'REMOVE',index:0},{type:'INSERT',index:3,key:'E'}]
+        childPatch(root, childPatches)
     } else {
         currentPatch.push({type: utils.REPLACE, node: newNode});
     }
@@ -46,9 +48,10 @@ function walk(oldNode, newNode, index, patches) {
 }
 
 function diffChildren(oldChildren, newChildren, index, patches) {
-    oldChildren.forEach((old, idx)=> {
-        walk(old, newChildren[idx], ++keyIndex, patches)
-    })
+    return childDiff(oldChildren, newChildren)
+    /*oldChildren.forEach((old, idx)=> {
+     walk(old, newChildren[idx], ++keyIndex, patches)
+     })*/
 }
 
 function diffAttrs(oldNode, newNode) {
