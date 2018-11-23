@@ -31,7 +31,7 @@ let utils = {
         return Object.prototype.toString.call(obj).replace(/\[object\s|\]/g, '');
     },
     isString(str){
-        return utils.type(str) == 'String';
+        return this.type(str) == 'String';
     }
 }
 

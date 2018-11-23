@@ -3,10 +3,8 @@
  */
 let utils = require('./utils')
 let {childDiff, childPatch} = require('./childDiff')
-let keyIndex = 0;
 
 function diff(oldTree, newTree, root) {
-    keyIndex = 0;
     let patches = {};
     let index = 0;
     walk(oldTree, newTree, index, patches, root);
@@ -37,7 +35,7 @@ function walk(oldNode, newNode, index, patches, root) {
             currentPatch.push({type: utils.ATTRS, node: attrsPatch});
         }
         let childPatches = diffChildren(oldNode.children, newNode.children, index, patches);
-        console.log(childPatches)//[{type:'REMOVE',index:0},{type:'INSERT',index:3,key:'E'}]
+        console.log(childPatches)
         childPatch(root, childPatches)
     } else {
         currentPatch.push({type: utils.REPLACE, node: newNode});
@@ -49,9 +47,6 @@ function walk(oldNode, newNode, index, patches, root) {
 
 function diffChildren(oldChildren, newChildren, index, patches) {
     return childDiff(oldChildren, newChildren)
-    /*oldChildren.forEach((old, idx)=> {
-     walk(old, newChildren[idx], ++keyIndex, patches)
-     })*/
 }
 
 function diffAttrs(oldNode, newNode) {

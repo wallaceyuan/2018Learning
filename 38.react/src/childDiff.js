@@ -1,4 +1,4 @@
-let createElement = require('./element');
+let {createElement} = require('./element');
 let utils = require('./utils')
 
 function childPatch(root, patches = []) {

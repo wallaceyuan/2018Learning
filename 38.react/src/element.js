@@ -24,6 +24,9 @@ class Element {
     }
 }
 
-module.exports = function (tagName, attrs, key, children) {
-    return new Element(tagName, attrs, key, children);
+module.exports = {
+    createElement:function (tagName, attrs, key, children) {
+        return new Element(tagName, attrs, key, children);
+    },
+    Element:Element
 }
