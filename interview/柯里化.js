@@ -29,7 +29,7 @@ function add(a, b) {
     }
 }*/
 
-/*const curry = (fn, arr = []) => (...args)=>(a=> a.length === fn.length ? fn(...a) : curry(fn, a))([...arr, ...args])*/
+const curry = (fn, arr = []) => (...args)=>(a=> a.length === fn.length ? fn(...a) : curry(fn, a))([...arr, ...args])
 
 var addCurry = curry(add);
 addCurry(1)(2)
