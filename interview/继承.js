@@ -2,6 +2,8 @@
  * Created by yuan on 2018/11/23.
  */
 //ES5 继承
+
+
 function Super() {}
 
 Super.prototype.getNumber = function() {
