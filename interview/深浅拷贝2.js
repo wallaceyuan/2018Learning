@@ -5,6 +5,9 @@ let a = {
     age: 1,
     jobs: {
         first: 'FE'
+    },
+    test:()=>{
+        console.log('test')
     }
 }
 
@@ -57,3 +60,7 @@ var BB = deepClone(AA);
 BB[0].name.test = 22
 console.log(BB);
 console.log(AA);
+
+
+var bb = JSON.parse(JSON.stringify(a))
+console.log('bb',bb)
