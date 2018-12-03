@@ -1,18 +1,15 @@
 //bind返回一个新函数
-
 Function.prototype.myBind = function (context) {
     if (typeof this !== 'function') {
         throw new TypeError('Error')
     }
-    var _this = this
-    var args = [...arguments].slice(1)
+    let args = Array.prototype.slice.call(arguments,1)
+    let _this = this
     return function F() {
-        // 因为返回了一个函数，我们可以 new F()，所以需要判断
         if (this instanceof F) {
-            console.log('...args, ...arguments',...args, ...arguments)
             return new _this(...args, ...arguments)
         }
-        return _this.apply(context, args.concat(...arguments))
+        _this.apply(context,args.concat([...arguments]))
     }
 }
 
