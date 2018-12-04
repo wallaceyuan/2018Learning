@@ -82,7 +82,7 @@ function sumStrings(a,b){
 
 console.log(sumStrings('13', '217'));
 
-var test = 222.115
+var test = 222.135
 function toFixed(num, s) {
     var times = Math.pow(10, s)
     var des = num * times + 0.5
@@ -92,3 +92,4 @@ function toFixed(num, s) {
 
 console.log(test.toFixed(2));
 console.log(toFixed(test, 2));
+parseFloat((222.135).toFixed(10))
