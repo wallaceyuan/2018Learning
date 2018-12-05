@@ -29,7 +29,7 @@ class Point {
 // Must call super constructor in derived class before accessing 'this' or returning from derived constructor
 class ColorPoint extends Point {
     constructor(x,y,color) {
-        super(x,y)
+        super(x,y)//Point.prototype.constructor.call(this)。
         this.color = color;
     }
 }
