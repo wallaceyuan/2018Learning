@@ -37,12 +37,12 @@ let arrNumber = [10, 22, 2, 22, 3, 44]
 var count = 0
 function BubbleSort(arr) {
     let temp;
-    for(var i= 0,l=arr.length;i<l;i++){
-        for(var j=arr.length-1; j>i; j--){
-            if(arr[j] < arr[j-1]){
-                temp =  arr[j]
-                arr[j] = arr[j-1]
-                arr[j-1] = temp
+    for (var i = 0, l = arr.length; i < l; i++) {
+        for (var j = arr.length - 1; j > i; j--) {
+            if (arr[j] < arr[j - 1]) {
+                temp = arr[j]
+                arr[j] = arr[j - 1]
+                arr[j - 1] = temp
             }
         }
     }
@@ -54,14 +54,14 @@ console.log(BubbleSort(arrNumber));
 //选择排序
 function select_sort(array) {
     var lenth = array.length
-    for(var i=0;i<lenth-1;i++){
+    for (var i = 0; i < lenth - 1; i++) {
         var minIndex = i;
-        for(var j=i+1;j<lenth;j++){
-            if(array[j]<array[minIndex]){
+        for (var j = i + 1; j < lenth; j++) {
+            if (array[j] < array[minIndex]) {
                 minIndex = j;
             }
         }
-        if(minIndex != i){
+        if (minIndex != i) {
             var temp = array[i];
             array[i] = array[minIndex];
             array[minIndex] = temp;
@@ -73,20 +73,20 @@ console.log(select_sort(arrNumber));
 
 //快速排序法
 function quickSort(arr) {
-    if(arr.length < 1){
+    if (arr.length < 1) {
         return arr
     }
     let leftArr = []
     let rightArr = []
     let q = arr[0]
-    for(let i = 1;i<arr.length;i++){
-        if(arr[i]>q){
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > q) {
             rightArr.push(arr[i])
-        }else{
+        } else {
             leftArr.push(arr[i])
         }
     }
-    return [].concat(quickSort(leftArr),[q],quickSort(rightArr))
+    return [].concat(quickSort(leftArr), [q], quickSort(rightArr))
 }
 console.log(quickSort(arrNumber));
 
@@ -94,14 +94,26 @@ console.log(quickSort(arrNumber));
 function getFibonacci(n) {
     var fibarr = [];
     var i = 0
-    while(i<n){
-        if(i <=1){
+    while (i < n) {
+        if (i <= 1) {
             fibarr.push(i)
-        }else{
-            fibarr.push(fibarr[i-1]+fibarr[i-2])
+        } else {
+            fibarr.push(fibarr[i - 1] + fibarr[i - 2])
         }
         i++
     }
     return fibarr
 }
+
+function fib(n, a = 1, b = 1, arr = [1]) {
+    if (n <= 1) {
+        return {res: b, arr}
+    }
+    if (n) {
+        return fib(n - 1, b, a + b, [...arr, a + b])
+    }
+}
+
 console.log(getFibonacci(10));
+
+console.log(fib(10));

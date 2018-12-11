@@ -2,16 +2,41 @@ const path = require('path');
 const webpack = require('webpack');
 const HappyPack = require('happypack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 /**
  * 1.尽量减小搜索的范围
  */
 module.exports = {
-    entry: './src/index.js',
+    //entry: ['@babel/polyfill','./src/index.js'],
+    entry:{
+        pageA: './src/pageA',
+        pageB: './src/pageB',
+        pageC: './src/pageC'
+    },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: '[name].[hash:8].js',
+        filename: '[name].js',
         //publicPath: 'http://localhost:8080/'
+    },
+    optimization:{
+        splitChunks:{
+            cacheGroups:{
+                commons:{
+                    chunks:"initial",
+                    minChunks:2,
+                    minSize:0
+                },
+                vendor:{
+                    test:/node_module/,
+                    chunks:'initial',
+                    name: "vendor",
+                    priority: 10,
+                    enforce: true
+                }
+            }
+        }
+    },
+    externals: {
+        jquery: 'jQuery'//如果要在浏览器中运行，那么不用添加什么前缀，默认设置就是global
     },
     //当你引入一个模块的时候，要进行解析
     // resolve: {
@@ -63,9 +88,33 @@ module.exports = {
             manifest: path.join(__dirname, 'dist', 'manifest.json')
         }),
         //new WebpackParallelUglifyPlugin(),
-        new HtmlWebpackPlugin({
+        /*new HtmlWebpackPlugin({
             template: './src/index.html',
             filename: 'index.html'
+        }),*/
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            filename: 'pageA.html',
+            chunks: ['pageA'],
+            minify: {
+                removeAttributeQuotes: true
+            }
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            filename: 'pageB.html',
+            chunks: ['pageB'],
+            minify: {
+                removeAttributeQuotes: true
+            }
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            filename: 'pageC.html',
+            chunks: ['pageC'],
+            minify: {
+                removeAttributeQuotes: true
+            }
         })
     ]
 }

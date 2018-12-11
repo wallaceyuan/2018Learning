@@ -10,6 +10,7 @@
 //console.log(fetch);
 //let get = require('../dist/bundle.js');
 //get.getName();
+
 console.log('hello');
 
 let name = 'zfpx';
@@ -22,3 +23,14 @@ if (__development__ == 'development') {
     console.log(s);
 }
 
+const set = new Set(); // ES6 Set
+set.add(1);
+set.add(2);
+set.add(3);
+
+const arr = [1, 2, 3]; // ES6 for..of
+for (const a of arr) {
+    console.log(a);
+}
+
+console.log(arr.findIndex(x => x === 2));  // ES6 Array.prototype.findIndex

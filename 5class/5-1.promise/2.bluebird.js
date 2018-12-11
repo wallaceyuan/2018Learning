@@ -16,7 +16,7 @@ function promisify(fn) {
     }
 }
 
-let read = promisify(fs.readFile)
+let read = m(fs.readFile)
 read('../1.txt', 'utf-8').then(data=> {
     console.log('data promisify', data)
 })

@@ -6,13 +6,13 @@
 function bigNumber(a, b) {
     a = a.split('')
     b = b.split('')
-    c = 0, res = ''
+    let c = 0, result = ''
     while (a.length || b.length || c) {
         c += ~~a.pop() + ~~b.pop()
-        res = c % 10 + res
+        result += c % 10
         c = c > 9
     }
-    return res.replace(/^0+/g,'')
+    return result.replace(/^0+/g,'')
 }
 
 
