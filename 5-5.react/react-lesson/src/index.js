@@ -6,7 +6,7 @@ import Home from './components/Home';
 import User from './components/User';
 import Profile from './components/Profile';
 import {createStore} from 'redux'
-
+import Bundle from './components/Bundle';
 /*import App from './App';
  import * as serviceWorker from './serviceWorker';*/
 //ReactDOM.render(<label className="test" htmlFor='hello'>hello<span>world</span></label>, document.getElementById('root'));
@@ -37,7 +37,7 @@ import {createStore} from 'redux'
  container.append(tag)
  }*/
 //React.createElement(<h1 name="yy">hello<span>world</span></h1>, document.getElementById('root'));
-const INCREMENT='INCREMENT';
+const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
 
 const aa = React.createElement(
@@ -58,6 +58,8 @@ function counterReducer(state = 0,action) {
     }
 }
 const store = createStore(counterReducer)
+
+let LazyAbout=(props) => (<Bundle {...props} load={ ()=> require('./About')} />)
 
 class Counter extends React.Component {
     constructor(props) {
@@ -111,18 +113,18 @@ class Counter extends React.Component {
 }
 
 ReactDOM.render(
-    <Counter
+    /*<Counter
         value={store.getState()}
         onIncrement = {()=>store.dispatch({type:'INCREMENT'})}
         onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-    />,
-    /*<Router>
+    />*/
+    <Router>
         <div>
             <Route path="/" component={Home}/>
-            <Route path="/user" component={User}/>
-            <Route path="/profile" component={Profile}/>
+            <Route path="/user" component={LazyAbout}/>
+            {/*<Route path="/profile" component={Profile}/>*/}
         </div>
-    </Router>*/
+    </Router>,
     /*React.createElement(
      'label',
      {htmlFor:'hello',className:'test'},
