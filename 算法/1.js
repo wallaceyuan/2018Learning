@@ -1,15 +1,19 @@
 /**
  * Created by yuanyuan on 2018/12/7.
  */
-function bsearch(A, x) {
-    let L = 0,//查询范围左边界
-        r = A.length - 1,//查询范围右边界
-        guess
-    while (l <= r) {
-        guess = Math.floor((1+r)/2)
-    }
+
+const inputFuncStr = "function a () { console.log('transfer') }";
+// 出参格式参考1：
+const outputFuncStr = "const a = () => { console.log('transfer') }";
+
+function transfer(inputFuncStr) {
+    return inputFuncStr.replace(
+        /function\s+([^() ]+)\s*\(([^() ]*)\)(.*)/,
+        "const $1 = ($2) =>$3"
+    );
 }
 
+console.log(transfer(outputFuncStr));
 
 
 //减1法
