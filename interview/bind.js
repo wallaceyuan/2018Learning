@@ -34,16 +34,20 @@ function original(a, b) {
 }
 
 
-var unboundGetX = module.getX;
+/*var unboundGetX = module.getX;
 console.log(unboundGetX()); // The function gets invoked at the global scope
 // expected output: undefined
 
 var boundGetX = unboundGetX.myBind(module);
 console.log(boundGetX());
 // expected output: 42
-console.log('=====')
+console.log('=====')*/
 
 var newOrigin = original.myBind(module,1,2)
 var newObj = new newOrigin()
 
 console.log('newObj',newObj);
+
+var obj = {}
+
+newOrigin.call(obj,333)
