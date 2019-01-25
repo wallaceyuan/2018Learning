@@ -13,21 +13,25 @@ function change(bills) {
                 const idx = remain.indexOf(p)
                 idx > -1 ? remain.splice(remain.indexOf(p), 1) : flag = false
             } else {
-                console.log('1515151')
                 flag = false
-                if(remain.indexOf('10') > -1 && remain.indexOf('10')){
-
-                }
-                /*let count = 0
-                for (var i = 0, l = remain.length; i < l; i++) {
-                    count = count + remain[i]
-                    console.log(count)
-                    if (count == 15) {
-                        remain.splice(0,i)
-                        flag = true
-                        break;
+                remain = remain.sort()
+                const t = remain.indexOf(10)
+                const f = remain.indexOf(5)
+                if (t > -1 && f > -1) {
+                    remain.splice(t, 1)
+                    remain.splice(f, 1)
+                    flag = true
+                } else {
+                    flag = true
+                    for (var i = 0; i < 3; i++) {
+                       if(remain[i]!=5){
+                           flag = false
+                       }
                     }
-                }*/
+                    if(flag){
+                        remain.splice(0, 3)
+                    }
+                }
             }
         }
     })
