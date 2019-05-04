@@ -1,6 +1,7 @@
 import * as types from "../action-types";
 import 'es6-promise';
 import fetch from 'isomorphic-fetch'
+import axios from 'axios';
 
 export default{
     increment(payload){
@@ -37,5 +38,19 @@ export default{
     decrement(payload){
         return {type: types.DECREMENT, payload: payload}
     },
-
+    getAjax(payload){
+        console.log('getAjaxgetAjax')
+        return {
+            type: types.GETAJAX,
+            payload:new Promise((resolve, reject)=> {
+                axios.get('https://easy-mock.com/mock/5c6cb037241b092e864e14c8/v1/get_canary_process_detail')
+                    .then(function (response) {
+                        resolve(response)
+                    })
+                    .catch(function (error) {
+                        reject(error);
+                    });
+            })
+        }
+    }
 }

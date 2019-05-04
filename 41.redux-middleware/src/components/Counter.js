@@ -10,6 +10,9 @@ class Counter extends Component {
     componentWillMount(){
         this.unsubscribe = store.subscribe(()=>{});
     }
+    componentDidMount(){
+        this.props.getAjax();
+    }
     componentWillUnmount(){
         this.unsubscribe();//取消订阅
     }
